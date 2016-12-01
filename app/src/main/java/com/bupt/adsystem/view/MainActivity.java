@@ -2,6 +2,7 @@ package com.bupt.adsystem.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.usb.UsbManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -69,6 +71,8 @@ public class MainActivity extends Activity {
     TelephonyManager mTelMgr;
 
     public static final int Elevator_Info = 1;
+
+    private ImageView logoView;
 
     private Handler mMainHandler = new Handler(){
         @Override
@@ -234,6 +238,14 @@ public class MainActivity extends Activity {
 //        } else {
 //            Toast.makeText(this, "USB device Num is:" + usbDevcieList.size(), Toast.LENGTH_LONG).show();
 //        }
+        logoView = (ImageView)findViewById(R.id.logo_image);
+        logoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,DemoActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
