@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="information_frame_layout_height">100dp</dimen>
+
+    <!--text size-->
+    <dimen name="text_size">10dp</dimen>
+</resources>

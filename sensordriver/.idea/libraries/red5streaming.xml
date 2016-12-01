@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="red5streaming">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../red5prolib/libs/red5streaming.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
