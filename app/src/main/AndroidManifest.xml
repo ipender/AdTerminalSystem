@@ -20,6 +20,13 @@
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.flash" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:name=".view.MyApplication"
         android:allowBackup="true"
@@ -44,6 +51,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.DemoActivity"></activity>
+
+
+        <activity android:name=".yasea.TestActivity"></activity>
+
+        <activity android:name=".yasea.ViewActivity"></activity>
 
         <service android:name=".downloadtask.DownloadService"/>
         
