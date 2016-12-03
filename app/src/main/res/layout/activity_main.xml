@@ -16,23 +16,56 @@
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:background="@color/rose_gold">
+        android:layout_weight="12"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/textView"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="0层"/>
+            android:gravity="bottom"
+            android:textColor="@color/item_white"
+            android:textSize="22sp"
+            android:text="0层"
+            android:paddingBottom="5dp" />
 
+        <LinearLayout
+            android:id="@+id/time_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/time"
+                android:text="00 00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/item_white"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:text="0000-00-00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/item_white"/>
+
+            <TextView
+                android:id="@+id/week"
+                android:text="星期一"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/item_white"/>
+        </LinearLayout>
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:background="#00000000"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_toRightOf="@id/time_layout"
             android:text="测试"/>
         
         <ImageView
@@ -49,7 +82,7 @@
         android:id="@+id/video_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="35">
+        android:layout_weight="30">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -74,29 +107,12 @@
             android:visibility="invisible"/>
     </FrameLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:background="@color/rose_gold">
 
-        <TextView
-            android:id="@+id/Sensor_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="sensor state"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true" />
-
-    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="35">
+        android:layout_weight="30">
         <ImageSwitcher
             android:id="@+id/image_switcher"
             android:layout_width="match_parent"
@@ -107,26 +123,100 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:background="@color/rose_gold">
+        android:layout_weight="20"
+        android:background="@color/colorPrimary">
 
         <TextView
-            android:id="@+id/telephony_text"
+            android:id="@+id/Sensor_TextView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="维保电话：010-1234567"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/telephony_text"
-            android:gravity="center"
-            android:layout_alignParentTop="true"
+            android:text="sensor state"
+            android:layout_toRightOf="@+id/weather_layout"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="今天晴转多云,10~25C"/>
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true" />
+
+        <LinearLayout
+            android:id="@+id/weather_layout"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="晴转多云"
+                android:textColor="@color/item_white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="1℃~12℃"
+                android:textColor="@color/item_white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="无持续风向2级"
+                android:textColor="@color/item_white"/>
+        </LinearLayout>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/default_cursor_color">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/item_white"
+            android:background="@drawable/green_border"
+            android:padding="3dp"
+            android:text="在线运行"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/lightpink"
+            android:text="12345678"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/royalblue"
+            android:text="质检有效期至"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/lightpink"
+            android:text="2017-06"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/royalblue"
+            android:text="救援电话"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/crimson"
+            android:text="03791234"/>
+    </LinearLayout>
 </LinearLayout>

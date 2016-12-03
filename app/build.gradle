@@ -6,10 +6,14 @@ android {
 
     defaultConfig {
         applicationId "com.bupt.adsystem"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
     }
     buildTypes {
         release {
@@ -21,6 +25,8 @@ android {
         jniLibs.srcDir 'libs'
         jni.srcDirs = [] //disable automatic ndk-build call
     }
+
+
 }
 
 dependencies {
@@ -33,4 +39,5 @@ dependencies {
     compile files('libs/dom4j/dom4j-2.0.0-RC1.jar')
     compile files('libs/ksoap2/ksoap2-android-assembly-3.6.0-jar-with-dependencies.jar')
     compile project(':sensordriver')
+    compile project(path: ':rtmplibrary')
 }

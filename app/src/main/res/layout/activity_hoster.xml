@@ -123,48 +123,8 @@
             android:layout_toLeftOf="@id/space_chat_list_right"
             android:gravity="bottom">
 
-            <include layout="@layout/layout_live_chat_list" />
         </FrameLayout>
 
-        <ViewAnimator
-            android:id="@+id/va_bottom_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="6.0dip">
-
-            <ViewAnimator
-                android:id="@+id/va_controls"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:measureAllChildren="false"
-                android:padding="5.0dip">
-
-
-                <org.anyrtc.widgets.BottomControl
-
-                    android:id="@+id/ll_host_audience_controls"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:baselineAligned="false"
-                    android:gravity="bottom"
-                    android:paddingBottom="5.0dip">
-
-
-                    <ImageView
-                        android:id="@+id/iv_host_text"
-                        style="@style/style_live_ibtn_controls"
-                        android:onClick="OnBtnClicked"
-                        android:src="@drawable/selector_btn_chat" />
-
-
-                </org.anyrtc.widgets.BottomControl>
-
-            </ViewAnimator>
-
-            <include layout="@layout/layout_live_input" />
-
-        </ViewAnimator>
     </RelativeLayout>
 
 

@@ -53,8 +53,6 @@
         <activity android:name=".view.DemoActivity"></activity>
 
 
-        <activity android:name=".yasea.TestActivity"></activity>
-
         <activity android:name=".yasea.ViewActivity"></activity>
 
         <service android:name=".downloadtask.DownloadService"/>
