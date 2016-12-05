@@ -3,6 +3,7 @@ package com.bupt.adsystem.RemoteServer;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.bupt.adsystem.Utils.AdSystemConfig;
 
@@ -106,7 +107,17 @@ public class MiscUtil {
 
                     if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = httpURLConnection.getInputStream();
+
+                        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "GBK"));
+                        StringBuffer buffer = new StringBuffer();
+                        String line = "";
+                        while ((line = in.readLine()) != null){
+                            buffer.append(line);
+                        }
+
                         String text = read(inputStream).toString();
+                        text = buffer.toString();
+
                         if (DEBUG) Log.d(TAG, text);
                         Message message = new Message();
                         message.what = handlerCode;
@@ -144,7 +155,7 @@ public class MiscUtil {
 
     public static String generateHttpGetUrl(int isRepair, int moverDir, int battery, int doorOpen,
                                             int hasPerson, int CFloor, int CSignal) {
-        String baseUrl = "http://117.158.178.198:8010/LNG-LOCAL-WEB/inshn/SignalAdd.do?";
+        String baseUrl = "http://aokai.lymatrix.com/inshn/SignalAdd.do?";
         StringBuilder sb = new StringBuilder();
         sb.append("Device_Id=10000000000000000001");
         sb.append("&isRepair=" + isRepair + "&");

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.bupt.adsystem.Utils.AdSystemConfig;
 import com.bupt.adsystem.Utils.UpdateMedia;
@@ -27,8 +28,8 @@ public class MediaUpdateReceiver implements MessageTargetReceiver {
     private DownloadManager mImageDldMgr;
 
     private String mScheduleId;
-    private static final String fileServer = "http://117.158.178.198:8010/media/";
-    private static final String xmlStrategy = "http://117.158.178.198:8010/policy/";
+    private static final String fileServer = "http://aokai.lymatrix.com/media/";
+    private static final String xmlStrategy = "http://aokai.lymatrix.com/policy/";
     private AdMediaInfo newMediaInfo;
     private AdMediaInfo oldMediaInfo;
     private MediaStrategyMgr mStrategyMgr;
@@ -55,6 +56,7 @@ public class MediaUpdateReceiver implements MessageTargetReceiver {
                 oldMediaInfo = mStrategyMgr.adMediaInfo;    // this line can't be deleted
                 process(oldMediaInfo, newMediaInfo);
                 mStrategyMgr.savaXmlMediaStrategy(mXmlText);
+//                Toast.makeText(mContext,msg.obj.toString(),Toast.LENGTH_SHORT).show();
             }
         }
     };

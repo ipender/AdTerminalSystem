@@ -1,1 +1,1 @@
-include ':app', ':libuvccamera', ':xutils', ':sensordriver'
+include ':app', ':libuvccamera', ':xutils', ':sensordriver', ':rtmplibrary'

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bupt.adsystem.Utils.AdSystemConfig;
 import com.bupt.adsystem.view.MainActivity;
@@ -31,9 +32,8 @@ import java.util.TimerTask;
 public class ServerRequest {
     private static final String TAG = "ServerRequest";
     private static final boolean DEBUG = AdSystemConfig.DEBUG;
-
-    private static final String HOST_NAME = "http://10.210.12.237:8080";
-    private String mWebServerUrl = "http://117.158.178.198:8010/esmp-ly-o-websvr/ws/esmp?wsdl";
+    private static final String HOST_NAME = "http://aokai.lymatrix.com";
+    private String mWebServerUrl = "http://aokai2.lymatrix.com/ws/esmp?wsdl";
     private static final String MethodName = "DeviceAdvScheduleDownRealVersion";
 
     private static final int MSG_REQUEST_OK = 0x01;
@@ -90,7 +90,7 @@ public class ServerRequest {
                 MiscUtil.requestJsonFromWebservice(mWebServerUrl, MethodName, jsonStr, mWebRequestHandler);
             }
         };
-        timer.scheduleAtFixedRate(timerTask, 0, 10000);
+        timer.scheduleAtFixedRate(timerTask, 0, 500);
         Timer time2 = new Timer();
         TimerTask timerTask2 = new TimerTask() {
             @Override
@@ -104,6 +104,8 @@ public class ServerRequest {
                                 "hasPerson: %02d Warning: %02d RFID: %08x",
                         mSensorData[0], mSensorData[1], mSensorData[2], mSensorData[3], mSensorData[4], rfidId);
                 Message message = new Message();
+                message.arg1 = mSensorData[1];
+                message.arg2 = mSensorData[0];
                 message.what = MainActivity.Elevator_Info;
                 message.obj = display;
                 mMainHandler.sendMessage(message);
@@ -160,6 +162,7 @@ public class ServerRequest {
                 try {
                     JSONObject rootJson = new JSONObject(jsonStr);
                     JSONObject subJson = rootJson.getJSONObject("data");
+//                    Toast.makeText(mContext,subJson.toString(),Toast.LENGTH_SHORT).show();
                     String scheduleId = subJson.getString("scheduleId");
                     if ( (mStrategyMgr.adMediaInfo.resolution == null) || (!scheduleId.equals(mStrategyMgr.adMediaInfo.resolution))) {
                         mStrategyMgr.adMediaInfo.resolution = scheduleId;

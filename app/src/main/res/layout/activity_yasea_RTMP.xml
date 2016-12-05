@@ -39,7 +39,8 @@
         android:text="record"
         android:id="@+id/record"
         android:layout_alignBottom="@+id/publish"
-        android:layout_toRightOf="@id/swCam" />
+        android:layout_toRightOf="@id/swCam"
+        android:visibility="gone" />
 
     <Button
         android:layout_width="wrap_content"
