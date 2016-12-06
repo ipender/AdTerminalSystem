@@ -266,13 +266,19 @@ public class MainActivity extends Activity {
     }
 
     TextView timeTv,dateTv,weekTv;
+<<<<<<< HEAD
     TextView upTv,downTv;
+=======
+>>>>>>> c2a4dbe84add1502a74fa5fb1987ff6fcff1346e
     private void initView(){
         timeTv =(TextView)findViewById(R.id.time);
         dateTv =(TextView)findViewById(R.id.date);
         weekTv =(TextView)findViewById(R.id.week);
+<<<<<<< HEAD
         upTv =(TextView)findViewById(R.id.up_tv);
         downTv =(TextView)findViewById(R.id.down_tv);
+=======
+>>>>>>> c2a4dbe84add1502a74fa5fb1987ff6fcff1346e
     }
 
     public void setStringData(){

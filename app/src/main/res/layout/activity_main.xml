@@ -57,6 +57,12 @@
         </LinearLayout>
 
 
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:textColor="@color/item_white"
+            android:textSize="22sp"
+            android:text="0层"
+            android:paddingBottom="5dp" />
 
         <LinearLayout
             android:id="@+id/time_layout"
@@ -80,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
                 android:textColor="@color/item_white"/>
+                android:textColor="@color/item_white"/>
 
             <TextView
                 android:id="@+id/week"
@@ -87,6 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
+                android:textColor="@color/item_white"/>
                 android:textColor="@color/item_white"/>
         </LinearLayout>
         <Button
@@ -97,7 +105,7 @@
             android:layout_toRightOf="@id/time_layout"
             android:textSize="30sp"
             android:text="测试"/>
-        
+
         <ImageView
             android:id="@+id/logo_image"
             android:layout_width="100px"
@@ -167,6 +175,7 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
 
+
         <TextView
             android:id="@+id/Sensor_TextView"
             android:layout_width="wrap_content"
@@ -208,6 +217,7 @@
                 android:textColor="@color/item_white"/>
         </LinearLayout>
 
+
     </RelativeLayout>
 
     <LinearLayout
@@ -240,6 +250,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="30sp"
+            android:textColor="@color/lightpink"
+            android:text="12345678"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:textColor="@color/royalblue"
             android:text="质检有效期至"/>
 
@@ -265,5 +281,6 @@
             android:textSize="30sp"
             android:textColor="@color/crimson"
             android:text="18903791234"/>
+            android:text="03791234"/>
     </LinearLayout>
 </LinearLayout>
