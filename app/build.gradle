@@ -35,9 +35,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:support-v4:23.0.1'
     compile project(':libuvccamera')
-    compile project(':xutils')
     compile files('libs/dom4j/dom4j-2.0.0-RC1.jar')
     compile files('libs/ksoap2/ksoap2-android-assembly-3.6.0-jar-with-dependencies.jar')
     compile project(':sensordriver')
     compile project(path: ':rtmplibrary')
+
+    compile 'org.xutils:xutils:3.3.38'
 }

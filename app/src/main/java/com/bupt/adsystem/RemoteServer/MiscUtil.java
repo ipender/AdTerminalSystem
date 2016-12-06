@@ -13,6 +13,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xutils.common.util.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -115,8 +116,8 @@ public class MiscUtil {
                             buffer.append(line);
                         }
 
-                        String text = read(inputStream).toString();
-                        text = buffer.toString();
+//                        String text = read(inputStream).toString();
+                        String text = buffer.toString();
 
                         if (DEBUG) Log.d(TAG, text);
                         Message message = new Message();

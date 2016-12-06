@@ -15,6 +15,7 @@ import com.bupt.sensordriver.sensor;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.util.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -90,7 +91,7 @@ public class ServerRequest {
                 MiscUtil.requestJsonFromWebservice(mWebServerUrl, MethodName, jsonStr, mWebRequestHandler);
             }
         };
-        timer.scheduleAtFixedRate(timerTask, 0, 500);
+        timer.scheduleAtFixedRate(timerTask, 0, 10000);
         Timer time2 = new Timer();
         TimerTask timerTask2 = new TimerTask() {
             @Override
@@ -111,7 +112,7 @@ public class ServerRequest {
                 mMainHandler.sendMessage(message);
             }
         };
-        time2.scheduleAtFixedRate(timerTask2, 0, 3000);
+        time2.scheduleAtFixedRate(timerTask2, 0, 1000);
 
 //        new Thread(new Runnable() {
 //            @Override
@@ -157,14 +158,24 @@ public class ServerRequest {
 //                MessageContext messageContext = new MessageContext(mContext, mJSONObject);
 //                String result = MessageDispatcher.dispatchMessage(messageContext);
 //            }
+            LogUtil.e("dispatchMessage--"+msg.what);
             if (msg.what == MiscUtil.QUEST_FileServer_SUCCESS) {
                 String jsonStr = (String) msg.obj;
                 try {
                     JSONObject rootJson = new JSONObject(jsonStr);
                     JSONObject subJson = rootJson.getJSONObject("data");
 //                    Toast.makeText(mContext,subJson.toString(),Toast.LENGTH_SHORT).show();
+                    LogUtil.e("jsonStr-->"+jsonStr);
                     String scheduleId = subJson.getString("scheduleId");
+                    LogUtil.e("scheduleId-->"+scheduleId);
+                    LogUtil.e("mStrategyMgr.adMediaInfo.resolution-->"+mStrategyMgr.adMediaInfo.resolution);
                     if ( (mStrategyMgr.adMediaInfo.resolution == null) || (!scheduleId.equals(mStrategyMgr.adMediaInfo.resolution))) {
+                        mStrategyMgr.adMediaInfo.resolution = scheduleId;
+                        MessageTargetReceiver receiver = new MediaUpdateReceiver();
+                        MessageContext message = new MessageContext(mContext, "{\"OK\":\"OK\"}");
+                        message.setScheduleId(scheduleId);
+                        receiver.receiveMessage(message);
+                    }else {
                         mStrategyMgr.adMediaInfo.resolution = scheduleId;
                         MessageTargetReceiver receiver = new MediaUpdateReceiver();
                         MessageContext message = new MessageContext(mContext, "{\"OK\":\"OK\"}");
@@ -181,6 +192,7 @@ public class ServerRequest {
                 }
             }
         }
+
     };
 
     /**

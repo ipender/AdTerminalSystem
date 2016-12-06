@@ -9,6 +9,9 @@ import android.preference.PreferenceManager;
 import com.bupt.adsystem.Utils.AdSystemConfig;
 import com.bupt.adsystem.RemoteServer.AlarmUtil;
 
+import org.xutils.BuildConfig;
+import org.xutils.x;
+
 /**
  * Created by wyouflf on 15/10/28.
  */
@@ -47,6 +50,8 @@ public class MyApplication extends Application {
         Settings.SystemInit(mContext);
         AlarmUtil.initAlarmWhenStartUp(mContext);
 
+        x.Ext.init(this);
+        x.Ext.setDebug(true); // 是否输出debug日志, 开启debug会影响性能.
     }
 
     public static MyApplication instance() {

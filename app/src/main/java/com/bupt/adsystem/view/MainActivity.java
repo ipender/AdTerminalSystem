@@ -33,6 +33,8 @@ import com.bupt.adsystem.downloadtask.DownloadManager;
 import com.serenegiant.usb.USBMonitor;
 import com.serenegiant.usb.UVCCamera;
 
+import org.xutils.common.util.LogUtil;
+
 import java.lang.reflect.Method;
 import java.util.Calendar;
 import java.util.TimeZone;

@@ -11,6 +11,8 @@ import com.bupt.adsystem.Utils.UpdateMedia;
 import com.bupt.adsystem.downloadtask.DownloadManager;
 import com.bupt.adsystem.downloadtask.OnDownload;
 
+import org.xutils.common.util.LogUtil;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Set;
@@ -63,6 +65,7 @@ public class MediaUpdateReceiver implements MessageTargetReceiver {
 
     @Override
     public String receiveMessage(MessageContext messageContext) {
+        LogUtil.e("receiveMessage------");
         mContext = messageContext.getContext();
         mScheduleId = messageContext.getScheduleId();
         mStrategyMgr = MediaStrategyMgr.instance(mContext);
@@ -77,6 +80,7 @@ public class MediaUpdateReceiver implements MessageTargetReceiver {
 //            e.printStackTrace();
 //        }
 //        MiscUtil.postRequestTextFile(xmlStrategy + mScheduleId + ".xml", jsonObject.toString(), mMediaStrategyUpdateHandler);
+        LogUtil.e("xmlStrategy.url------"+xmlStrategy + mScheduleId + ".xml");
         MiscUtil.getRequestTextFile(xmlStrategy + mScheduleId + ".xml", mMediaStrategyUpdateHandler,
                 MiscUtil.QUEST_FileServer_SUCCESS);
         return null;
