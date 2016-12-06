@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.bupt.adsystem">
 
     <!-- 在SDCard中创建与删除文件权限 -->
@@ -27,6 +28,8 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+    <uses-sdk android:targetSdkVersion="23" android:minSdkVersion="19"
+        tools:overrideLibrary="tv.danmaku.ijk.media.player_arm64, tv.danmaku.ijk.media.player_x86_64"/>
 
     <application
         android:name=".view.MyApplication"
