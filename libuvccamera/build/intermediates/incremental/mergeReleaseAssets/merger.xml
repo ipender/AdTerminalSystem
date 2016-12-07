@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="G:\AndroidStudioProjects\adSystem\libuvccamera\src\main\assets"/><source path="G:\AndroidStudioProjects\adSystem\libuvccamera\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="G:\AndroidStudioProjects\adSystem\libuvccamera\src\release\assets"/></dataSet></merger>
