@@ -59,6 +59,8 @@ public class ViewActivity extends AppCompatActivity implements RtmpHandler.RtmpL
         sp = getSharedPreferences("Yasea", MODE_PRIVATE);
         rtmpUrl = sp.getString("rtmpUrl", rtmpUrl);
 
+        
+
         // initialize url.
         final EditText efu = (EditText) findViewById(R.id.url);
         efu.setText(rtmpUrl);
