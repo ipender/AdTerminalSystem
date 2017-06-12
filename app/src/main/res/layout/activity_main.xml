@@ -22,41 +22,6 @@
         android:paddingRight="30dp">
 
         <LinearLayout
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_alignParentBottom="true"
-            android:paddingBottom="15dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/up_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:textColor="@color/white"
-                android:visibility="invisible"
-                android:text="上"/>
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:textColor="@color/item_white"
-                android:textSize="55sp"
-                android:text="0层"
-                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:textColor="@color/white"
-                android:id="@+id/down_tv"
-                android:visibility="invisible"
-                android:text="下"/>
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/time_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +54,66 @@
                 android:layout_height="wrap_content"
                 android:textSize="30sp"/>
         </LinearLayout>
-        <Button
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true">
+
+
+            <TextView
+                android:id="@+id/floor_tv"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:text="1"
+                android:drawablePadding="10dp"
+                android:textSize="140sp"
+                android:gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/phone_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"/>
+
+                <ImageView
+                    android:id="@+id/signal_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/signal1"
+                    android:layout_marginTop="25dp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:src="@mipmap/battery_icon"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/main_logo_icon"
+                android:layout_marginTop="50dp" />
+        </LinearLayout>
+     <!--   <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,14 +128,9 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:src="@mipmap/elevator_guard"/>
+            android:src="@mipmap/elevator_guard"/>-->
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/default_cursor_color"></LinearLayout>
 
     <FrameLayout
         android:id="@+id/video_frame_layout"
@@ -142,7 +161,7 @@
             android:layout_height="match_parent"
             android:visibility="invisible"/>
 
-        <org.webrtc.SurfaceViewRenderer
+        <org.webrtc.SurfaceVewRenderer
             android:id="@+id/webrtc_surface_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -150,10 +169,65 @@
 
     </FrameLayout>
 
+
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/default_cursor_color"></LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="物业电话：15836541258"
+                android:maxLines="1"
+                style="@style/middle_text"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="维保电话：15836541258"
+                android:maxLines="1"
+                style="@style/middle_text"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="免费安装：15836541258"
+                android:maxLines="1"
+                style="@style/middle_text"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:ellipsize = "end"
+                style="@style/middle_text"
+                android:lineSpacingExtra="15dp"
+                android:text="对于习近平总书记的深刻论断，清华大学党委书记陈旭深有体会。她说，习总书记在讲话中从党和国家事业发展的战略高度，对新时期高校思想政治工作的使命、目标、原则和任务进行了深入阐述，提出了明确要求。我们要按照习总书记重要讲话精神和中央文件要求，坚持扎根中国、融通中外、立足时代、面向未来的发展道路，进一步加强党对高校的领导，坚持社会主义办学方向，提高学生思想政治素质，加强学校师资队伍建设，不断改革创新思想政治工作，为中国特色社会主义事业培养更多全面发展的合格建设者和可靠接班人。"
+                android:textColor="@color/white"
+                android:layout_marginLeft="30dp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -166,7 +240,7 @@
             android:background="@color/black_overlay"/>
     </FrameLayout>
 
-    <RelativeLayout
+<!--    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="14"
@@ -281,5 +355,155 @@
             android:textColor="@color/crimson"
             android:text="18903791234"/>
             android:text="03791234"/>
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                style="@style/weather_text"
+                android:text="12月05日"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/weather_sunny_icon"
+                android:layout_margin="20dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                style="@style/weather_text"
+                android:text="-1℃/12℃"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                style="@style/weather_text"
+                android:text="12月06日"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/weather_cloud_icon"
+                android:layout_margin="20dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                style="@style/weather_text"
+                android:text="-3℃/5℃"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                style="@style/weather_text"
+                android:text="12月05日"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/weather_sonw_icon"
+                android:layout_margin="20dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                style="@style/weather_text"
+                android:text="-3℃/1℃"/>
+        </LinearLayout>
+
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="5">
+
+        <TextView
+            android:id="@+id/network_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在线运行："
+            style="@style/bottom_text"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12345678901234567890"
+            style="@style/bottom_text"
+            android:textColor="@color/rose_gold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="检验有效期至："
+            style="@style/bottom_text"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-12-12"
+            style="@style/bottom_text"
+            android:textColor="@color/rose_gold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="救援电话："
+            style="@style/bottom_text"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15236958452"
+            style="@style/bottom_text"
+            android:textColor="@color/colorAccent"/>
+    </LinearLayout>
+
 </LinearLayout>
