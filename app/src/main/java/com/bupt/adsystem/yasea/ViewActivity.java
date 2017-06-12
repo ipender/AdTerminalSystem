@@ -1,3 +1,4 @@
+/*
 package com.bupt.adsystem.yasea;
 
 import android.content.SharedPreferences;
@@ -340,3 +341,4 @@ public class ViewActivity extends AppCompatActivity implements RtmpHandler.RtmpL
     }
 }
 
+*/

@@ -3,7 +3,6 @@ package com.bupt.adsystem.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.usb.UsbManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +21,7 @@ import android.widget.VideoView;
 
 import com.android.internal.telephony.ITelephony;
 import com.bupt.adsystem.Camera.CameraApp;
+import com.bupt.adsystem.Camera.UVCCameraEnumerator;
 import com.bupt.adsystem.R;
 import com.bupt.adsystem.RemoteServer.ServerRequest;
 import com.bupt.adsystem.Utils.AdImageCtrl;
@@ -30,10 +30,17 @@ import com.bupt.adsystem.Utils.AdVideoCtrl;
 import com.bupt.adsystem.Utils.NewImageMgr;
 import com.bupt.adsystem.Utils.NewVideoMgr;
 import com.bupt.adsystem.downloadtask.DownloadManager;
+import com.serenegiant.usb.IFrameCallback;
 import com.serenegiant.usb.USBMonitor;
 import com.serenegiant.usb.UVCCamera;
 
-import org.xutils.common.util.LogUtil;
+import org.anyrtc.core.AnyRTMP;
+import org.anyrtc.core.RTMPGuestHelper;
+import org.anyrtc.core.RTMPGuestKit;
+import org.anyrtc.core.RTMPHosterHelper;
+import org.anyrtc.core.RTMPHosterKit;
+import org.webrtc.SurfaceViewRenderer;
+import org.webrtc.VideoRenderer;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -44,22 +51,13 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     private static final boolean DEBUG = AdSystemConfig.DEBUG;
 
-    // for thread pool
-//    private static final int CORE_POOL_SIZE = 1;		// initial/minimum threads
-//    private static final int MAX_POOL_SIZE = 4;			// maximum threads
-//    private static final int KEEP_ALIVE_TIME = 10;		// time periods while keep the idle thread
-//    protected static final ThreadPoolExecutor EXECUTER
-//            = new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME,
-//            TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
-
-    // for accessing USB and USB camera
-    private USBMonitor mUSBMonitor;
-    private UsbManager mUsbManager;
-    private UVCCamera mUVCCamera;
-
     private ImageSwitcher mImageSwitcher;
     private VideoView mVideoView;
     private TextureView mTextureView;
+    private SurfaceViewRenderer mRTCSurfaceView;
+    private VideoRenderer mRTCRenderer = null;
+    private RTMPHosterKit mHosterKit = null;
+    private RTMPGuestKit mGuestKit = null;
 
     private Button button;
     private TextView mElevatorTextView;
@@ -78,20 +76,24 @@ public class MainActivity extends Activity {
 
     private ImageView logoView;
 
-    private Handler mMainHandler = new Handler(){
+    boolean mTestButtonStatus = false;
+
+    UVCCameraEnumerator.UVCVideoRecorder mUVCVideoRecoder;
+
+    private Handler mMainHandler = new Handler() {
         @Override
         public void dispatchMessage(Message msg) {
             if (msg.what == Elevator_Info) {
                 String elevatorInfo = (String) msg.obj;
                 mElevatorTextView.setText(elevatorInfo);
                 downTv.setVisibility(View.VISIBLE);
-                textView.setText(msg.arg2+"层");
+                textView.setText(msg.arg2 + "层");
 //                downTv.setText(""+msg.arg1);
                 int fo = msg.arg1;
-                if(fo == 0){
+                if (fo == 0) {
                     downTv.setVisibility(View.VISIBLE);
                     upTv.setVisibility(View.INVISIBLE);
-                }else if(fo ==1){
+                } else if (fo == 1) {
                     upTv.setVisibility(View.VISIBLE);
                     downTv.setVisibility(View.INVISIBLE);
                 }
@@ -102,11 +104,11 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE );
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
-                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
-                            WindowManager.LayoutParams.FLAG_FULLSCREEN
-                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                        | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+                        | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         this.setContentView(R.layout.activity_main);
         initView();
@@ -118,12 +120,33 @@ public class MainActivity extends Activity {
         textView = (TextView) findViewById(R.id.textView);
         mTextureView = (TextureView) findViewById(R.id.textureView);
         mVideoView = (VideoView) findViewById(R.id.surface_view);
+        mRTCSurfaceView = (SurfaceViewRenderer) findViewById(R.id.webrtc_surface_view);
         mElevatorTextView = (TextView) findViewById(R.id.Sensor_TextView);
-        mTextureView.setVisibility(View.VISIBLE);
+        mTextureView.setVisibility(View.INVISIBLE);
         mVideoView.setVisibility(View.INVISIBLE);
-        mVideoView.setZOrderOnTop(true);
+//        mVideoView.setZOrderOnTop(true);
+        mRTCSurfaceView.setVisibility(View.VISIBLE);
 
-        DownloadManager.instance(getApplicationContext());
+        final Activity mAct = this;
+
+//        final String mRtmpUrl = "rtmp://192.168.1.101:1935/live/test";
+        final String mRtmpUrl = "rtmp://aokai.lymatrix.com/aokai/test25.mp4";
+        final String mPullUrl = "rtmp://aokai.lymatrix.com/aokai/test25.mp4";
+        final UVCCameraEnumerator mUVCCamera = UVCCameraEnumerator.instance(getApplicationContext(), null);
+        mRTCSurfaceView.init(AnyRTMP.Inst().Egl().getEglBaseContext(), null);
+        mRTCRenderer = new VideoRenderer(mRTCSurfaceView);
+        mHosterKit = new RTMPHosterKit(this, mRTMPHosterHelper);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (DEBUG) Log.d(TAG, "set UVCCameraCapturer()!");
+                // Caution: this should be done when UVCCamera is connected!
+                mHosterKit.setUVCCameraCapturer(mRTCRenderer.GetRenderPointer(), mUVCCamera);
+            }
+        }, 5000);
+
+
+//        DownloadManager.instance(getApplicationContext());
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +176,8 @@ public class MainActivity extends Activity {
 //
 ////                String urlGet = MiscUtil.generateHttpGetUrl(0, 1, 80, 0, 0, 1, -89);
 ////                MiscUtil.getRequestTextFile(urlGet, handler);
-                Class<TelephonyManager> c = TelephonyManager.class;
+
+/*                Class<TelephonyManager> c = TelephonyManager.class;
                 try
                 {
                     Method getITelephonyMethod = c.getDeclaredMethod("getITelephony", (Class[]) null);
@@ -168,15 +192,46 @@ public class MainActivity extends Activity {
                 catch (Exception e)
                 {
                     Log.e(TAG, "Fail to answer ring call.", e);
+                }*/
+
+                if (!mTestButtonStatus) {
+                    /*mHosterKit.StartRtmpStream(mRtmpUrl);
+                    mVideoView.setVisibility(View.INVISIBLE);
+                    mVideoView.setZOrderOnTop(false);
+                    mRTCSurfaceView.setVisibility(View.VISIBLE);*/
+
+                    mGuestKit = new RTMPGuestKit(mAct, mRTMPGuestHelper);
+                    mGuestKit.StartRtmpPlay(mPullUrl, mRTCRenderer.GetRenderPointer());
+
+                   /* mUVCVideoRecoder = mUVCCamera.getVideoRecorder();
+                    mUVCVideoRecoder.startRecord();*/
+                } else {
+                   /* mHosterKit.StopRtmpStream();
+                    mVideoView.setVisibility(View.VISIBLE);
+                    mVideoView.setZOrderOnTop(true);
+                    mRTCSurfaceView.setVisibility(View.INVISIBLE);*/
+
+                    mGuestKit.StopRtmpPlay();
+                    mGuestKit.Clear();
+                    mGuestKit = null;
+
+                    /*
+                    *  when this function is called,
+                    *  RTMPHosterKit need to instantiate once again!
+                    * */
+//                    mHosterKit.Clear();
+                 /*   mUVCVideoRecoder.stopRecord();*/
                 }
+
+                mTestButtonStatus = !mTestButtonStatus;
                 if (DEBUG) Log.d(TAG, "Button Pressed!");
             }
         });
 
-        NewImageMgr.instance(mContext, mImageSwitcher);
+   /*     NewImageMgr.instance(mContext, mImageSwitcher);
         NewVideoMgr.instance(mContext, mVideoView);
         ServerRequest request = new ServerRequest(mContext, mMainHandler);
-        request.setFloorTextView(textView);
+        request.setFloorTextView(textView);*/
 
 //        mAdVideoCtrl = AdVideoCtrl.instance(mContext, mVideoView);
 //        mAdImageCtrl = AdImageCtrl.instance(mContext, mImageSwitcher);
@@ -254,7 +309,8 @@ public class MainActivity extends Activity {
 //        } else {
 //            Toast.makeText(this, "USB device Num is:" + usbDevcieList.size(), Toast.LENGTH_LONG).show();
 //        }
-        logoView = (ImageView)findViewById(R.id.logo_image);
+
+/*        logoView = (ImageView)findViewById(R.id.logo_image);
         logoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -262,147 +318,170 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
-        setStringData();
+        setStringData();*/
     }
 
-    TextView timeTv,dateTv,weekTv;
-<<<<<<< HEAD
-    TextView upTv,downTv;
-=======
->>>>>>> c2a4dbe84add1502a74fa5fb1987ff6fcff1346e
-    private void initView(){
-        timeTv =(TextView)findViewById(R.id.time);
-        dateTv =(TextView)findViewById(R.id.date);
-        weekTv =(TextView)findViewById(R.id.week);
-<<<<<<< HEAD
-        upTv =(TextView)findViewById(R.id.up_tv);
-        downTv =(TextView)findViewById(R.id.down_tv);
-=======
->>>>>>> c2a4dbe84add1502a74fa5fb1987ff6fcff1346e
+    TextView timeTv, dateTv, weekTv;
+    TextView upTv, downTv;
+
+    private void initView() {
+        timeTv = (TextView) findViewById(R.id.time);
+        dateTv = (TextView) findViewById(R.id.date);
+        weekTv = (TextView) findViewById(R.id.week);
+        upTv = (TextView) findViewById(R.id.up_tv);
+        downTv = (TextView) findViewById(R.id.down_tv);
     }
 
-    public void setStringData(){
+    public void setStringData() {
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         String mYear = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
         String mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
         String mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
         String mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
-        if("1".equals(mWay)){
-            mWay ="星期日";
-        }else if("2".equals(mWay)){
-            mWay ="星期一";
-        }else if("3".equals(mWay)){
-            mWay ="星期二";
-        }else if("4".equals(mWay)){
-            mWay ="星期三";
-        }else if("5".equals(mWay)){
-            mWay ="星期四";
-        }else if("6".equals(mWay)){
-            mWay ="星期五";
-        }else if("7".equals(mWay)){
-            mWay ="星期六";
+        if ("1".equals(mWay)) {
+            mWay = "星期日";
+        } else if ("2".equals(mWay)) {
+            mWay = "星期一";
+        } else if ("3".equals(mWay)) {
+            mWay = "星期二";
+        } else if ("4".equals(mWay)) {
+            mWay = "星期三";
+        } else if ("5".equals(mWay)) {
+            mWay = "星期四";
+        } else if ("6".equals(mWay)) {
+            mWay = "星期五";
+        } else if ("7".equals(mWay)) {
+            mWay = "星期六";
         }
         weekTv.setText(mWay);
-        dateTv.setText(mYear+"-"+mMonth+"-"+mDay);
+        dateTv.setText(mYear + "-" + mMonth + "-" + mDay);
 
         String hour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
         String minute = String.valueOf(c.get(Calendar.MINUTE));
-        timeTv.setText(hour+" : "+minute);
+        timeTv.setText(hour + " : " + minute);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        mCameraApp.registerUsbMonitor();
-//        mCameraApp.startPreview();
+        LifeCycleMgr.onResume();
     }
 
     @Override
     protected void onPause() {
-//        mCameraApp.unregisterUsbMonitor();
-//        mCameraApp.startPreview();
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        LifeCycleMgr.onStop();
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
 //        mCameraApp.destroy();
-        if(mServerRequest!=null){
+        if (mServerRequest != null) {
             mServerRequest.httpDisconnect();
         }
         super.onDestroy();
     }
 
-//    private final USBMonitor.OnDeviceConnectListener mOnDeviceConnectListener = new USBMonitor.OnDeviceConnectListener() {
-//        @Override
-//        public void onAttach(UsbDevice device) {
-//
-//        }
-//
-//        @Override
-//        public void onDettach(UsbDevice device) {
-//
-//        }
-//
-//        @Override
-//        public void onConnect(UsbDevice device, final USBMonitor.UsbControlBlock ctrlBlock, boolean createNew) {
-//            if (mUVCCamera != null)
-//                mUVCCamera.destroy();
-//            mUVCCamera = new UVCCamera();
-//            EXECUTER.execute(new Runnable() {
-//                @Override
-//                public void run() {
-//                    mUVCCamera.open(ctrlBlock);
-//                    mUVCCamera.setStatusCallback(new IStatusCallback() {
-//                        @Override
-//                        public void onStatus(final int statusClass, final int event, final int selector,
-//                                             final int statusAttribute, final ByteBuffer data) {
-//
-//                        }
-//                    });
-//                    if (mSurface != null) {
-//                        mSurface.release();
-//                        mSurface = null;
-//                    }
-//                    try {
-//                        mUVCCamera.setPreviewSize(UVCCamera.DEFAULT_PREVIEW_WIDTH, UVCCamera.DEFAULT_PREVIEW_HEIGHT, UVCCamera.FRAME_FORMAT_MJPEG);
-//                    } catch (final IllegalArgumentException e) {
-//                        // fallback to YUV mode
-//                        try {
-//                            mUVCCamera.setPreviewSize(UVCCamera.DEFAULT_PREVIEW_WIDTH, UVCCamera.DEFAULT_PREVIEW_HEIGHT, UVCCamera.DEFAULT_PREVIEW_MODE);
-//                        } catch (final IllegalArgumentException e1) {
-//                            mUVCCamera.destroy();
-//                            mUVCCamera = null;
-//                        }
-//                    }
-//                    if (mUVCCamera != null) {
-//                        final SurfaceTexture st = mTextureView.getSurfaceTexture();
-//                        if (st != null)
-//                            mSurface = new Surface(st);
-//                        mUVCCamera.setPreviewDisplay(mSurface);
-////                        mUVCCamera.setFrameCallback(mIFrameCallback, UVCCamera.PIXEL_FORMAT_RGB565/*UVCCamera.PIXEL_FORMAT_NV21*/);
-//                        mUVCCamera.startPreview();
-//                    }
-//                }
-//            });
-//
-//        }
-//
-//        @Override
-//        public void onDisconnect(UsbDevice device, USBMonitor.UsbControlBlock ctrlBlock) {
-//            if (mUVCCamera != null) {
-//                mUVCCamera.close();
-//                if (mSurface != null) {
-//                    mSurface.release();
-//                    mSurface = null;
-//                }
-//            }
-//        }
-//
-//        @Override
-//        public void onCancel() {
-//
-//        }
-//    };
+
+    final RTMPHosterHelper mRTMPHosterHelper = new RTMPHosterHelper() {
+        @Override
+        public void OnRtmpStreamOK() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG) Log.d(TAG, "RTMP 连接成功！");
+                }
+            });
+        }
+
+        @Override
+        public void OnRtmpStreamReconnecting(final int times) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG) Log.d(TAG, String.format("RTMP 重连中(%1$d秒)...", times));
+                }
+            });
+        }
+
+        @Override
+        public void OnRtmpStreamStatus(final int delayMs, final int netBand) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG)
+                        Log.d(TAG, String.format(getString(org.anyrtc.anyrtmp.R.string.str_rtmp_status), delayMs, netBand));
+                }
+            });
+        }
+
+        @Override
+        public void OnRtmpStreamFailed(int code) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG) Log.d(TAG, "RTMP 连接失败");
+                }
+            });
+        }
+
+        @Override
+        public void OnRtmpStreamClosed() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG) Log.d(TAG, "RTMP 关闭!");
+                }
+            });
+        }
+    };
+
+    final RTMPGuestHelper mRTMPGuestHelper = new RTMPGuestHelper() {
+        @Override
+        public void OnRtmplayerOK() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG) Log.d(TAG, "RTMP 连接成功！");
+                }
+            });
+        }
+
+        @Override
+        public void OnRtmplayerStatus(final int cacheTime, final int curBitrate) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG)
+                        Log.d(TAG, String.format("RTMP status time: (%1$d秒), speed: (%1$d秒)", cacheTime, curBitrate));
+                }
+            });
+        }
+
+        @Override
+        public void OnRtmplayerCache(final int time) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG) Log.d(TAG, String.format("RTMP 缓存时间(%1$d秒)...", time));
+                }
+            });
+        }
+
+        @Override
+        public void OnRtmplayerClosed(int errcode) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (DEBUG) Log.d(TAG, "RTMP 关闭！");
+                }
+            });
+        }
+    };
 }

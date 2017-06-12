@@ -1,3 +1,4 @@
+/*
 package com.bupt.adsystem.view;
 
 import android.app.Activity;
@@ -10,9 +11,11 @@ import com.bupt.adsystem.R;
 import com.bupt.adsystem.yasea.ViewActivity;
 
 
+*/
 /**
  * Created by xf on 2016/12/1.
- */
+ *//*
+
 
 public class DemoActivity extends Activity{
 
@@ -21,9 +24,11 @@ public class DemoActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
-        /**
+        */
+/**
          * 初始化RTMPC引擎
-         */
+         *//*
+
 //        RTMPCHybird.Inst().Init(getApplicationContext());
 //        RTMPCHybird.Inst().InitEngineWithAnyrtcInfo("teameetingtest", "meetingtest", "OPJXF3xnMqW+7MMTA4tRsZd6L41gnvrPcI25h9JCA4M", "c4cd1ab6c34ada58e622e75e41b46d6d");
         btn1 = (Button)findViewById(R.id.button1);
@@ -69,3 +74,4 @@ public class DemoActivity extends Activity{
         startActivity(intent);
     }
 }
+*/

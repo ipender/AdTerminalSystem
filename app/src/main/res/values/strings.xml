@@ -1,72 +1,72 @@
 <resources>
     <string name="app_name">AdSystem</string>
 
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- Bilibili播放器-->
+    <string name="N_A">N/A</string>
+    <string name="close">Close</string>
+    <string name="exit">Exit</string>
+    <string name="sample">Sample</string>
+    <string name="recent">Recent</string>
+    <string name="settings">Settings</string>
+    <string name="tracks">Tracks</string>
+    <string name="toggle_player">Player</string>
+    <string name="toggle_render">Render</string>
+    <string name="toggle_ratio">Scale</string>
+    <string name="show_info">Info</string>
+    <string name="vdec">vdec</string>
+    <string name="fps">fps</string>
+    <string name="v_cache">v-cache</string>
+    <string name="a_cache">a-cache</string>
+    <string name="load_cost">load-cost</string>
+    <string name="seek_cost">seek_cost</string>
+    <string name="seek_load_cost">seek_load_cost</string>
+    <string name="tcp_speed">tcp_speed</string>
+    <string name="bit_rate">bit_rate</string>
 
-    <string name="str_title">AnyRTC Live Hybird</string>
-    <string name="main_title">多人连麦直播</string>
-    <string name="str_version">www.anyrtc.io Version: ${VERSION}</string>
+    <string name="media_information">Media Information</string>
+    <string name="mi_player">Player</string>
+    <string name="mi_media">Media</string>
+    <string name="mi_profile_level">Profile level</string>
+    <string name="mi_pixel_format">Pixel format</string>
+    <string name="mi_resolution">Resolution</string>
+    <string name="mi_length">Length</string>
+    <string name="mi_stream_fmt1">Stream #%d</string>
+    <string name="mi_type">Type</string>
+    <string name="mi_language">Language</string>
+    <string name="mi_codec">Codec</string>
+    <string name="mi_frame_rate">Frame rate</string>
+    <string name="mi_bit_rate">Bit rate</string>
+    <string name="mi_sample_rate">Sample rate</string>
+    <string name="mi_channels">Channels</string>
+    <string name="mi__selected_video_track">*</string>
+    <string name="mi__selected_audio_track">*</string>
 
-    <!-- Strings related to start live -->
-    <string name="prompt_live_topic">直播主题</string>
-    <string name="str_start_live">发起直播</string>
-    <string name="str_live_info">请创建一个直播主题</string>
-    <string name="title_activity_pre_start_live">开始直播</string>
-    <string name="str_rtmp_connect_success">RTMP 连接成功</string>
-    <string name="str_rtmp_connect_failed">RTMP 连接失败</string>
-    <string name="str_rtc_connect_success">RTC 连接成功</string>
-    <string name="str_rtc_connect_failed">RTC 连接失败</string>
-    <string name="str_reconnect_times">重连服务器：%1$d 次</string>
-    <string name="str_rtmp_status">RTMP 延迟：%1$d 网络：%2$d</string>
-    <string name="str_live_watcher_number">在线观看人数：%1$d</string>
-    <string name="str_hoster_leave">主播已离开，2秒后关闭页面</string>
-    <string name="str_hoster_not_live">主播还未开启直播, 2秒后关闭页面</string>
+    <string name="TrackType_video">Video</string>
+    <string name="TrackType_audio">Audio</string>
+    <string name="TrackType_subtitle">Subtitle</string>
+    <string name="TrackType_timedtext">Timed text</string>
+    <string name="TrackType_metadata">Meta data</string>
+    <string name="TrackType_unknown">Unknown</string>
 
-    <string name="str_setting">设置</string>
-    <string name="str_connect_hoster">连麦</string>
-    <string name="str_hangup_connect">挂断</string>
-    <string name="str_apply_connect_line">%1$s 请求连线</string>
-    <string name="str_agree">同意</string>
-    <string name="str_refused">拒绝</string>
-    <string name="str_line_disconnect">连线已断开</string>
-    <string name="str_hoster_refused">主播拒绝连线</string>
-    <string name="str_connect_full">连线已达最大人数</string>
-    <string name="str_apply_anyrtc_account">请去AnyRTC官网申请账号,如有疑问请联系客服!</string>
-    <string name="str_exit">退出</string>
-    <string name="str_ok">确定</string>
-    <string name="str_cancel">取消</string>
-    <string name="str_live_stop">您正在进行直播，确定要退出吗？</string>
-    <string name="str_line_hangup">您正在与主播进行连麦互动，确定要退出吗？</string>
-    <string name="str_no_audio_record_permission">缺少录音权限</string>
-    <string name="str_no_camera_permission">缺少摄像头权限</string>
+    <string name="VideoView_error_text_invalid_progressive_playback">Invalid progressive playback</string>
+    <string name="VideoView_error_text_unknown">Unknown</string>
+    <string name="VideoView_error_button">OK</string>
 
-    <string name="str_anyrtc_ok">正常</string>
-    <string name="str_unknow_exception">未知错误</string>
-    <string name="str_anyrtc_exception">SDK调用异常</string>
-    <string name="str_anyrtc_net_err">网络错误</string>
-    <string name="str_anyrtc_live_err">直播出错</string>
-    <string name="str_anyrtc_bad_req">服务不支持的错误请求</string>
-    <string name="str_anyrtc_auth_fail">认证失败</string>
-    <string name="str_anyrtc_no_user">此开发者信息不存在</string>
-    <string name="str_anyrtc_sql_err">服务器内部数据库错误</string>
-    <string name="str_anyrtc_arrears">账号欠费</string>
-    <string name="str_anyrtc_locked">账号被锁定</string>
-    <string name="str_anyrtc_force_exit">强制离开</string>
+    <string name="VideoView_ar_aspect_fit_parent">Aspect / Fit parent</string>
+    <string name="VideoView_ar_aspect_fill_parent">Aspect / Fill parent</string>
+    <string name="VideoView_ar_aspect_wrap_content">Aspect / Wrap content</string>
+    <string name="VideoView_ar_match_parent">Free / Fill parent</string>
+    <string name="VideoView_ar_16_9_fit_parent">16:9 / Fit parent</string>
+    <string name="VideoView_ar_4_3_fit_parent">4:3 / Fit parent</string>
 
-    <string name="share_str_weixin_title">&#160;连麦互动视频直播正在进行，快来围观...</string>
-    <string name="str_barrage">弹幕</string>
-    <string name="str_send">发送</string>
-    <string name="str_online">&#160;来了，欢迎~</string>
+    <string name="VideoView_render_none">Render: None</string>
+    <string name="VideoView_render_surface_view">Render: SurfaceView</string>
+    <string name="VideoView_render_texture_view">Render: TextureView</string>
 
-    <string name="str_live_close">关闭</string>
-    <string name="str_switch_camera">切换</string>
-    <string name="str_live_share">分享至微信</string>
+    <string name="VideoView_player_none">Player: None</string>
+    <string name="VideoView_player_AndroidMediaPlayer">Player: AndroidMediaPlayer</string>
+    <string name="VideoView_player_IjkMediaPlayer">Player: IjkMediaPlayer</string>
+    <string name="VideoView_player_IjkExoMediaPlayer">Player: IjkExoMediaPlayer</string>
 
-    <string name="str_copy_success">复制hls成功</string>
 
-    <string name="str_video_hd">超高清</string>
-    <string name="str_video_qhd">高清</string>
-    <string name="str_video_sd">标清</string>
-    <string name="str_video_low">流畅</string>
 </resources>

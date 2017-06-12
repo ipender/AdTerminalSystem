@@ -97,7 +97,7 @@ public class CameraApp {
         }
 
         @Override
-        public void onDettach(UsbDevice device) {
+        public void onDetach(UsbDevice device) {
 
         }
 
@@ -158,7 +158,7 @@ public class CameraApp {
         }
 
         @Override
-        public void onCancel() {
+        public void onCancel(UsbDevice device) {
 
         }
     };

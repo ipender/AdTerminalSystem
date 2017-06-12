@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/animator/card_flip_left_out.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/animator/card_flip_left_out.xml"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/animator/card_flip_left_in.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/animator/card_flip_left_in.xml"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/animator/card_flip_right_out.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/animator/card_flip_right_out.xml"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/animator/card_flip_right_in.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/animator/card_flip_right_in.xml"
+    }
+]

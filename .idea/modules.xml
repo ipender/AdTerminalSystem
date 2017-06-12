@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/adSystem.iml" filepath="$PROJECT_DIR$/adSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/anyrtc/anyrtc.iml" filepath="$PROJECT_DIR$/anyrtc/anyrtc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libuvccamera/libuvccamera.iml" filepath="$PROJECT_DIR$/libuvccamera/libuvccamera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sensordriver/sensordriver.iml" filepath="$PROJECT_DIR$/sensordriver/sensordriver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/usbCameraCommon/usbCameraCommon.iml" filepath="$PROJECT_DIR$/usbCameraCommon/usbCameraCommon.iml" />
+    </modules>
+  </component>
+</project>

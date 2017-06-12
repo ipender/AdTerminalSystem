@@ -2,7 +2,7 @@
  * UVCCamera
  * library and sample to access to UVC web camera on non-rooted Android device
  *
- * Copyright (c) 2014-2015 saki t_saki@serenegiant.com
+ * Copyright (c) 2014-2016 saki t_saki@serenegiant.com
  *
  * File name: UVCPreview.cpp
  *
@@ -183,9 +183,21 @@ int UVCPreview::setPreviewSize(int width, int height, int min_fps, int max_fps, 
 		result = uvc_get_stream_ctrl_format_size_fps(mDeviceHandle, &ctrl,
 			!requestMode ? UVC_FRAME_FORMAT_YUYV : UVC_FRAME_FORMAT_MJPEG,
 			requestWidth, requestHeight, requestMinFps, requestMaxFps);
+
+        /***************** add log below here, to see uvc_control_stream_t data *****************/
 	}
 	
 	RETURN(result, int);
+}
+
+/***************** add log below here, to see uvc_control_stream_t data *****************/
+int UVCPreview::probeUVCStreamCtrlInfo(uvc_stream_ctrl_t * ctrl_info) {
+    ENTER();
+
+    int result;
+    result = uvc_probe_stream_ctrl(mDeviceHandle, ctrl_info);
+
+    RETURN(result, int);
 }
 
 int UVCPreview::setPreviewDisplay(ANativeWindow *preview_window) {
@@ -224,18 +236,21 @@ int UVCPreview::setFrameCallback(JNIEnv *env, jobject frame_callback_obj, int pi
 				env->DeleteGlobalRef(mFrameCallbackObj);
 			}
 			mFrameCallbackObj = frame_callback_obj;
+			LOGW("Set new Frame Callback!");
 			if (frame_callback_obj) {
 				// get method IDs of Java object for callback
 				jclass clazz = env->GetObjectClass(frame_callback_obj);
+				LOGW("Env get callback class -> %d", clazz);
 				if (LIKELY(clazz)) {
 					iframecallback_fields.onFrame = env->GetMethodID(clazz,
-						"onFrame",	"(Ljava/nio/ByteBuffer;)V");
+						"onFrame", "(Ljava/nio/ByteBuffer;)V");
+					LOGW("Env get onFrame Method -> %d", iframecallback_fields.onFrame);
 				} else {
 					LOGW("failed to get object class");
 				}
 				env->ExceptionClear();
 				if (!iframecallback_fields.onFrame) {
-					LOGE("Can't find IFrameCallback#onFrame");
+					LOGE("Can't find IFrameCallback.onFrame ");
 					env->DeleteGlobalRef(frame_callback_obj);
 					mFrameCallbackObj = frame_callback_obj = NULL;
 				}
@@ -274,12 +289,12 @@ void UVCPreview::callbackPixelFormatChanged() {
 		break;
 	  case PIXEL_FORMAT_YUV20SP:
 		LOGI("PIXEL_FORMAT_YUV20SP:");
-		mFrameCallbackFunc = uvc_yuyv2yuv420SP;
+		mFrameCallbackFunc = uvc_yuyv2iyuv420SP;
 		callbackPixelBytes = (sz * 3) / 2;
 		break;
 	  case PIXEL_FORMAT_NV21:
 		LOGI("PIXEL_FORMAT_NV21:");
-		mFrameCallbackFunc = uvc_yuyv2iyuv420SP;
+		mFrameCallbackFunc = uvc_yuyv2yuv420SP;
 		callbackPixelBytes = (sz * 3) / 2;
 		break;
 	}
@@ -335,6 +350,9 @@ int UVCPreview::startPreview() {
 		{
 			if (LIKELY(mPreviewWindow)) {
 				result = pthread_create(&preview_thread, NULL, preview_thread_func, (void *)this);
+				LOGW("window exist!");
+			} else {
+			    LOGW("window don't exist!");
 			}
 		}
 		pthread_mutex_unlock(&preview_mutex);
@@ -865,6 +883,8 @@ void UVCPreview::do_capture_callback(JNIEnv *env, uvc_frame_t *frame) {
 				}
 			}
 			jobject buf = env->NewDirectByteBuffer(callback_frame->data, callbackPixelBytes);
+//			LOGW("IFrameCallback onece -> class: %d, method: %d, data: %d",
+//			        mFrameCallbackObj, iframecallback_fields.onFrame, buf);
 			env->CallVoidMethod(mFrameCallbackObj, iframecallback_fields.onFrame, buf);
 			env->ExceptionClear();
 			env->DeleteLocalRef(buf);

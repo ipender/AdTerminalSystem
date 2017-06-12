@@ -56,46 +56,38 @@
                 android:text="下"/>
         </LinearLayout>
 
-
-            android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:textColor="@color/item_white"
-            android:textSize="22sp"
-            android:text="0层"
-            android:paddingBottom="5dp" />
-
         <LinearLayout
             android:id="@+id/time_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/time"
-                android:text="00 00"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:textColor="@color/item_white"/>
-
+            android:gravity="center" >
             <TextView
                 android:id="@+id/date"
-                android:text="0000-00-00"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
-                android:textColor="@color/item_white"/>
-                android:textColor="@color/item_white"/>
+                android:text="2016-12-12"/>
 
             <TextView
                 android:id="@+id/week"
-                android:text="星期一"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:textColor="@color/item_white"/>
-                android:textColor="@color/item_white"/>
+                android:textSize="45sp"
+                android:text="星期一"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp" />
+
+            <TextClock
+                android:id="@+id/time"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"/>
         </LinearLayout>
         <Button
             android:id="@+id/button"
@@ -141,7 +133,7 @@
                 android:layout_height="match_parent"
                 android:foregroundGravity="center"
                 android:background="@color/colorPrimary"
-                android:visibility="visible"/>
+                android:visibility="invisible"/>
         </RelativeLayout>
 
         <TextureView
@@ -149,6 +141,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible"/>
+
+        <org.webrtc.SurfaceViewRenderer
+            android:id="@+id/webrtc_surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+
     </FrameLayout>
 
     <LinearLayout
