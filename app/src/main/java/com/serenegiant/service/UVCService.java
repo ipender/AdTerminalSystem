@@ -35,6 +35,7 @@ import android.util.SparseArray;
 import android.view.Surface;
 
 import com.bupt.adsystem.R;
+import com.bupt.adsystem.view.MainActivity;
 import com.serenegiant.common.BaseService;
 import com.serenegiant.usb.USBMonitor;
 import com.serenegiant.usb.USBMonitor.OnDeviceConnectListener;
@@ -120,7 +121,7 @@ public class UVCService extends BaseService {
 		if (DEBUG) Log.v(TAG, "showNotification:" + text);
         // Set the info for the views that show in the notification panel.
         final Notification notification = new Notification.Builder(this)
-			.setSmallIcon(R.drawable.ic_launcher)  // the status icon
+			.setSmallIcon(R.mipmap.ic_launcher_pd)  // the status icon
 			.setTicker(text)  // the status text
 			.setWhen(System.currentTimeMillis())  // the time stamp
 			.setContentTitle(getText(R.string.app_name))  // the label of the entry
@@ -137,6 +138,11 @@ public class UVCService extends BaseService {
 		@Override
 		public void onAttach(final UsbDevice device) {
 			if (DEBUG) Log.d(TAG, "OnDeviceConnectListener#onAttach:");
+		}
+
+		@Override
+		public void onDetach(UsbDevice device) {
+			if (DEBUG) Log.d(TAG, "OnDeviceConnectListener#onDettach:");
 		}
 
 		@Override
@@ -171,11 +177,6 @@ public class UVCService extends BaseService {
 					removeService(device);
 				}
 			}, 0);
-		}
-
-		@Override
-		public void onDettach(final UsbDevice device) {
-			if (DEBUG) Log.d(TAG, "OnDeviceConnectListener#onDettach:");
 		}
 
 		@Override

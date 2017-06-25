@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
+import com.bupt.adsystem.R;
 import com.serenegiant.common.BaseActivity;
 
 public class MainActivity extends BaseActivity {
@@ -44,7 +45,7 @@ public class MainActivity extends BaseActivity {
 			if (DEBUG) Log.i(TAG, "onCreate:new");
 			final Fragment fragment = new CameraFragment();
 			getFragmentManager().beginTransaction()
-					.add(R.id.container, fragment).commit();
+					.add(R.id.file_list_view, fragment).commit();  // container
 		}
 	}
 

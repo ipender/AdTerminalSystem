@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     android:weightSum="100"
     tools:context=".view.MainActivity">
 
@@ -11,15 +12,15 @@
         android:layout_height="0px"
         android:visibility="gone" />
 
+    <!-- 顶部的 时间、楼层、信号强度等信息显示区域-->
     <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="12"
-        android:background="@color/colorPrimary"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
         <LinearLayout
             android:id="@+id/time_layout"
@@ -97,6 +98,7 @@
                     android:id="@+id/signal_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:src="@mipmap/signal1"
                     android:layout_marginTop="25dp" />
                 <ImageView
@@ -113,31 +115,16 @@
                 android:src="@mipmap/main_logo_icon"
                 android:layout_marginTop="50dp" />
         </LinearLayout>
-     <!--   <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:layout_toRightOf="@id/time_layout"
-            android:textSize="30sp"
-            android:text="测试"/>
-
-        <ImageView
-            android:id="@+id/logo_image"
-            android:layout_width="100px"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/elevator_guard"/>-->
 
     </RelativeLayout>
 
+    <!-- 第二部分：视频播放区域-->
     <FrameLayout
         android:id="@+id/video_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/black"
-        android:layout_weight="33">
+        android:layout_weight="32">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -151,7 +138,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:foregroundGravity="center"
-                android:background="@color/colorPrimary"
                 android:visibility="invisible"/>
         </RelativeLayout>
 
@@ -161,15 +147,21 @@
             android:layout_height="match_parent"
             android:visibility="invisible"/>
 
-        <org.webrtc.SurfaceVewRenderer
+        <org.webrtc.SurfaceViewRenderer
             android:id="@+id/webrtc_surface_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"/>
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/video_pic"/>
 
     </FrameLayout>
 
-
+    <!-- 第三部分：部门电话以及新闻信息显示区域-->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -216,7 +208,7 @@
             android:orientation="vertical"
             android:gravity="center">
             <TextView
-                android:id="@+id/news"
+                android:id="@+id/misc_info_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="3"
@@ -229,10 +221,11 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- 第四部分：图片播放区域-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="33">
+        android:layout_weight="26">
         <ImageSwitcher
             android:id="@+id/image_switcher"
             android:layout_width="match_parent"
@@ -357,6 +350,7 @@
             android:text="03791234"/>
     </LinearLayout>-->
 
+    <!-- 第五部分： 天气预报显示区域-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -453,6 +447,7 @@
 
     </LinearLayout>
 
+    <!-- 第六部分： 电梯编号及有效期信息-->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -471,7 +466,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12345678901234567890"
+            android:text="1234567890123456789"
             style="@style/bottom_text"
             android:textColor="@color/rose_gold"/>
 

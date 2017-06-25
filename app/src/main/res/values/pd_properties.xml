@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="rtmp_push_url">rtmp://aokai.lymatrix.com/aokai/adsystem.mp4</string>
+    <string name="rtmp_pull_url">rtmp://aokai.lymatrix.com/aokai/test25.mp4</string>
+</resources>

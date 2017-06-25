@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    compileSdkVersion versionCompiler
+    buildToolsVersion versionBuildTool
 
     defaultConfig {
         applicationId "com.bupt.adsystem"
         minSdkVersion 19
-        targetSdkVersion 23
+        targetSdkVersion versionTarget
         versionCode 1
         versionName "1.0"
 
@@ -33,7 +33,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'junit:junit:4.12'
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:support-v4:${supportLibVersion}"
+    compile 'com.android.support:support-v4:23.0.1'
     compile "com.android.support:support-annotations:${supportLibVersion}"
     compile project(':libuvccamera')
     compile project(':usbCameraCommon')
@@ -41,20 +41,8 @@ dependencies {
     compile files('libs/ksoap2/ksoap2-android-assembly-3.6.0-jar-with-dependencies.jar')
     compile project(':anyrtc')
     compile project(':sensordriver')
-
-//    compile project(path: ':rtmplibrary')
-
+    //    compile project(path: ':rtmplibrary')
     // https://mvnrepository.com/artifact/com.googlecode.mp4parser/isoparser
-//    compile group: 'com.googlecode.mp4parser', name: 'isoparser', version: '1.1.18'
-
-
+    //    compile group: 'com.googlecode.mp4parser', name: 'isoparser', version: '1.1.18'
     compile 'org.xutils:xutils:3.3.38'
-    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.7.5'
-    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.5'
-    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.7.5'
-    compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.7.5'
-    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.7.5'
-    compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.7.5'
-    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.7.5'
-    compile 'com.squareup:otto:1.3.8'
 }

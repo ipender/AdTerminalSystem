@@ -12,22 +12,16 @@ import com.bupt.adsystem.Utils.AdSystemConfig;
 import com.bupt.adsystem.Utils.FileDirMgr;
 import com.bupt.adsystem.view.LifeCycle;
 import com.bupt.adsystem.view.LifeCycleMgr;
-import com.google.android.exoplayer.upstream.FileDataSource;
-import com.googlecode.mp4parser.FileDataSourceImpl;
-import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.tracks.h264.H264TrackImpl;
 import com.serenegiant.usb.IFrameCallback;
 import com.serenegiant.usb.Size;
 import com.serenegiant.usb.USBMonitor;
 import com.serenegiant.usb.UVCCamera;
 
-import org.anyrtc.core.AnyRTMP;
 import org.webrtc.CameraEnumerationAndroid;
 import org.webrtc.MediaCodecVideoEncoder;
 import org.webrtc.UVCCameraInterface;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
