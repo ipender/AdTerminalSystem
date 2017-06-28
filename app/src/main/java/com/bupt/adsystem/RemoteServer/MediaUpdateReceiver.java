@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bupt.adsystem.Utils.AdSystemConfig;
+import com.bupt.adsystem.Utils.Property;
 import com.bupt.adsystem.Utils.UpdateMedia;
 import com.bupt.adsystem.downloadtask.DownloadManager;
 import com.bupt.adsystem.downloadtask.OnDownload;
@@ -30,8 +31,8 @@ public class MediaUpdateReceiver implements MessageTargetReceiver {
     private DownloadManager mImageDldMgr;
 
     private String mScheduleId;
-    private static final String fileServer = "http://aokai.lymatrix.com/media/";
-    private static final String xmlStrategy = "http://aokai.lymatrix.com/policy/";
+    private static final String fileServer = Property.FILE_SERVER_URL;
+    private static final String xmlStrategy = Property.AD_STRATEGY_FILE_URL_BASE;
     private AdMediaInfo newMediaInfo;
     private AdMediaInfo oldMediaInfo;
     private MediaStrategyMgr mStrategyMgr;

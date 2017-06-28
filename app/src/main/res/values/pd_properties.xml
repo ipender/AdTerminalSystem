@@ -3,4 +3,17 @@
 
     <string name="rtmp_push_url">rtmp://aokai.lymatrix.com/aokai/adsystem.mp4</string>
     <string name="rtmp_pull_url">rtmp://aokai.lymatrix.com/aokai/test25.mp4</string>
+    
+    <string name="soap_web_service_url">http://aokai2.lymatrix.com/ws/esmp?wsdl</string>
+
+    <string name="soap_name_space">http://cxf.esmp.inshn.com/</string>
+
+    <string name="http_get_upload_info_url">http://aokai.lymatrix.com/inshn/SignalAdd.do?</string>
+
+    <string name="file_server_url_base">http://aokai.lymatrix.com/media/</string>
+    <string name="ad_strategy_file_url_base">http://aokai.lymatrix.com/policy/</string>
+    
+    <string name="administrator_phone">13598163660</string>
+
+
 </resources>

@@ -62,7 +62,6 @@
             android:orientation="vertical"
             android:layout_centerHorizontal="true">
 
-
             <TextView
                 android:id="@+id/floor_tv"
                 android:layout_marginTop="20dp"
@@ -230,7 +229,13 @@
             android:id="@+id/image_switcher"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_overlay"/>
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/image_init_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/video_pic"/>
     </FrameLayout>
 
 <!--    <RelativeLayout

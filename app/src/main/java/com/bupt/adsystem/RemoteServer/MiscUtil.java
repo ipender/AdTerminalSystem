@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bupt.adsystem.Utils.AdSystemConfig;
+import com.bupt.adsystem.Utils.Property;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
@@ -34,7 +35,7 @@ public class MiscUtil {
     private static final String TAG = "MiscUtil";
     private static final boolean DEBUG = AdSystemConfig.DEBUG;
 
-    public static final String NameSpace = "http://cxf.esmp.inshn.com/";
+    public static final String NameSpace = Property.SOAP_NAME_SPACE;
 
     public static final int QUEST_SUCCESS = 1;
     public static final int MALFORMED_URL = 2;
@@ -156,7 +157,7 @@ public class MiscUtil {
 
     public static String generateHttpGetUrl(int isRepair, int moverDir, int battery, int doorOpen,
                                             int hasPerson, int CFloor, int CSignal) {
-        String baseUrl = "http://aokai.lymatrix.com/inshn/SignalAdd.do?";
+        String baseUrl = Property.HTTP_GET_UPLOAD_INFO_URL_BASE;
         StringBuilder sb = new StringBuilder();
         sb.append("Device_Id=10000000000000000001");
         sb.append("&isRepair=" + isRepair + "&");

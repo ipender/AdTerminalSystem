@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bupt.adsystem.Utils.AdSystemConfig;
+import com.bupt.adsystem.Utils.Property;
 import com.bupt.adsystem.view.MainActivity;
 import com.bupt.sensordriver.rfid;
 import com.bupt.sensordriver.sensor;
@@ -34,14 +35,13 @@ public class ServerRequest {
     private static final String TAG = "ServerRequest";
     private static final boolean DEBUG = AdSystemConfig.DEBUG;
     private static final String HOST_NAME = "http://aokai.lymatrix.com";
-    private String mWebServerUrl = "http://aokai2.lymatrix.com/ws/esmp?wsdl";
+    private String mWebServerUrl = Property.SOAP_WEB_SERVICE_URL;
     private static final String MethodName = "DeviceAdvScheduleDownRealVersion";
 
     private static final int MSG_REQUEST_OK = 0x01;
     private Context mContext = null;
     private JSONObject mJSONObject;
     private static int mReceivedDataSize = 0;
-    private String mUsingServerUrl = HOST_NAME + "/adsystem/heart";
     private HttpURLConnection mURLConnection;
     private MediaStrategyMgr mStrategyMgr;
     private Handler mMainHandler;
@@ -216,7 +216,7 @@ public class ServerRequest {
         }
     }
 
-    public void longLiveHeart() {
+/*    public void longLiveHeart() {
         try {
             URL url = null;
             url = new URL(mUsingServerUrl);
@@ -249,6 +249,6 @@ public class ServerRequest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }

@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,6 +37,7 @@ import com.bupt.adsystem.RemoteServer.ServerRequest;
 import com.bupt.adsystem.Utils.AdImageCtrl;
 import com.bupt.adsystem.Utils.AdSystemConfig;
 import com.bupt.adsystem.Utils.AdVideoCtrl;
+import com.bupt.adsystem.Utils.Property;
 import com.bupt.sensordriver.rfid;
 import com.bupt.sensordriver.sensor;
 
@@ -113,6 +115,17 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //隐藏虚拟按键，并且全屏
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
                         | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -129,12 +142,13 @@ public class MainActivity extends Activity {
 
         mRfid = rfid.instance();
         mSensor = sensor.instance();
+        Property.init(getApplicationContext());
 
 
 //        final String mRtmpUrl = "rtmp://192.168.1.101:1935/live/test";
         final String mRtmpUrl = "rtmp://aokai.lymatrix.com/aokai/test25.mp4";
         final String mPullUrl = "rtmp://aokai.lymatrix.com/aokai/test25.mp4";
-        final UVCCameraEnumerator mUVCCamera = UVCCameraEnumerator.instance(getApplicationContext(), null);
+ /*       final UVCCameraEnumerator mUVCCamera = UVCCameraEnumerator.instance(getApplicationContext(), null);
         mRTCSurfaceView.init(AnyRTMP.Inst().Egl().getEglBaseContext(), null);
         mRTCRenderer = new VideoRenderer(mRTCSurfaceView);
         mHosterKit = new RTMPHosterKit(this, mRTMPHosterHelper);
@@ -145,7 +159,7 @@ public class MainActivity extends Activity {
                 // Caution: this should be done when UVCCamera is connected!
                 mHosterKit.setUVCCameraCapturer(mRTCRenderer.GetRenderPointer(), mUVCCamera);
             }
-        }, 5000);
+        }, 5000);*/
 
 
 //        DownloadManager.instance(getApplicationContext());
@@ -380,17 +394,17 @@ public class MainActivity extends Activity {
 
     private final static String[] warnMsg = {
             "empty for inflate",
-            "非困人非平层停梯报警",
-            "非困人断电报警",
-            "非困人蹲底报警",
-            "非困人冲顶报警",
-            "非平层停梯困人报警",
-            "平层困人报警",
+            "非困人非平层停梯报警",         // 1
+            "非困人断电报警",              // 2
+            "非困人蹲底报警",              // 3
+            "非困人冲顶报警",              // 4
+            "非平层停梯困人报警",           // 5
+            "平层困人报警",                // 6
             "断电困人报警",
-            "运行中开门困人报警",
+            "运行中开门困人报警",           // 8
             "蹲底困人报警",
-            "冲顶困人报警",
-            "一键拨号"
+            "冲顶困人报警",                // 9
+            "一键拨号"                    // 10
     };
 
     @Override
@@ -398,42 +412,42 @@ public class MainActivity extends Activity {
 
         if (DEBUG) Log.d(TAG, "keycode --> " + keycode);
 
-        if (!keycodeSet.contains(keycode)) return false;
+        Toast.makeText(this,"检测到案件按下：" + keycode, Toast.LENGTH_LONG).show();
+
+        if (!keycodeSet.contains(keycode)) return super.onKeyDown(keycode, event);
 
         int[] sensorData = mSensor.getSensorData();
 
         if (DEBUG) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < sensorData.length; i++) {
-                sb.append("data:[" + i + "]: " + sensorData[i] + "\n");
+                sb.append("data[" + i + "]: " + sensorData[i] + "  ");
             }
             Log.d(TAG, sb.toString());
             mMiscInfoTv.setText(sb.toString());
         }
 
+        mFloorStatusTv.setText(String.valueOf(sensorData[0]));
         switch (sensorData[1]) {
             case 0:
-                mFloorStatusTv.setText(sensorData[0]);
                 mFloorStatusTv.setCompoundDrawablesWithIntrinsicBounds(null,
                         ContextCompat.getDrawable(this, R.mipmap.down_icon), null, null);
                 break;
             case 1:
-                mFloorStatusTv.setText(sensorData[0]);
                 mFloorStatusTv.setCompoundDrawablesWithIntrinsicBounds(null,
                         ContextCompat.getDrawable(this, R.mipmap.up_icon), null, null);
                 break;
             case 2:
-                mFloorStatusTv.setText(sensorData[0]);
                 mFloorStatusTv.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 break;
         }
 
         if (sensorData[3] >= 1 && sensorData[3] <= 4) {
             Toast.makeText(this, warnMsg[sensorData[3]], Toast.LENGTH_LONG).show();
-            sendSMSMsg(telNum, warnMsg[sensorData[3]]);
+//            sendSMSMsg(telNum, warnMsg[sensorData[3]]);
         } else if (sensorData[3] > 4 && sensorData[3] <= 11) {
             Toast.makeText(this, warnMsg[sensorData[3]], Toast.LENGTH_LONG).show();
-            callPhone(telNum);
+//            callPhone(telNum);
         }
         return true;
     }
