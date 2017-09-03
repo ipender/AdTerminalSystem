@@ -4,32 +4,32 @@
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/recordingtime.xml"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/toggle.xml",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle.xml"
-    },
-    {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/mask_circle.xml",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/mask_circle.xml"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/toggle.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle.xml"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/frame_cross.9.png",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/frame_cross.9.png"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/toggle_button_base.xml",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle_button_base.xml"
-    },
-    {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/frame.9.png",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/frame.9.png"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/quater_clear_rect.xml",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/quater_clear_rect.xml"
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/toggle_button_base.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle_button_base.xml"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/border.xml",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/border.xml"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/quater_clear_rect.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/quater_clear_rect.xml"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/drawable/toggle_slide.xml",

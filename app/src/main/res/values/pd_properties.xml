@@ -8,7 +8,7 @@
 
     <string name="soap_name_space">http://cxf.esmp.inshn.com/</string>
 
-    <string name="http_get_upload_info_url">http://aokai.lymatrix.com/inshn/SignalAdd.do?</string>
+    <string name="http_get_upload_info_url">http://aokai.lymatrix.com/inshn/SignalAdd.do</string>
 
     <string name="file_server_url_base">http://aokai.lymatrix.com/media/</string>
     <string name="ad_strategy_file_url_base">http://aokai.lymatrix.com/policy/</string>

@@ -20,16 +20,16 @@
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xhdpi-v4/ic_frame_frame.png"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/mipmap-xhdpi-v4/ic_color_circle.png",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xhdpi-v4/ic_color_circle.png"
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/mipmap-xhdpi-v4/ic_frame_circle.png",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xhdpi-v4/ic_frame_circle.png"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/mipmap-xhdpi-v4/ic_frame_cross.png",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xhdpi-v4/ic_frame_cross.png"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/mipmap-xhdpi-v4/ic_frame_circle.png",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xhdpi-v4/ic_frame_circle.png"
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/mipmap-xhdpi-v4/ic_color_circle.png",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xhdpi-v4/ic_color_circle.png"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/release/mipmap-xhdpi-v4/ic_transparent.png",

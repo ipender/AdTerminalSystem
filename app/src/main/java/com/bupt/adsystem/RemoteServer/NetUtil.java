@@ -6,7 +6,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bupt.adsystem.Utils.AdSystemConfig;
+import com.bupt.adsystem.Utils.Const;
 import com.bupt.adsystem.Utils.Property;
+import com.bupt.adsystem.model.ElevatorInfo;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
@@ -25,14 +27,18 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by hadoop on 16-10-21.
  */
-public class MiscUtil {
+public class NetUtil {
 
-    private static final String TAG = "MiscUtil";
+    private static final String TAG = "NetUtil";
     private static final boolean DEBUG = AdSystemConfig.DEBUG;
 
     public static final String NameSpace = Property.SOAP_NAME_SPACE;
@@ -42,6 +48,45 @@ public class MiscUtil {
     public static final int IO_EXCEPTION = 3;
     public static final int QUEST_FileServer_SUCCESS = 4;
     public static final int QUEST_Monitor_SUCCESS = 5;
+
+    private static ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+
+    public static void asyncReportElevatorInfo(ElevatorInfo info, final Handler handler) {
+        asyncReportElevatorInfo(Property.HTTP_GET_UPLOAD_INFO_URL_BASE, info, handler);
+    }
+
+    public static void asyncReportElevatorInfo(final String serverUrl, ElevatorInfo info, final Handler handler) {
+        final String httpGetUrl = convertElevatorInfo2HttpGetUrl(serverUrl, info);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(httpGetUrl);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setConnectTimeout(3000);
+                    httpURLConnection.setRequestMethod("GET");
+                    httpURLConnection.connect();
+
+                    if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        if (handler != null) handler.sendEmptyMessage(Const.UpdateElevatorInfoSuccess);
+                    } else {
+                        if (handler != null) handler.sendEmptyMessage(Const.UpdateElevatorInfoFailed);
+                    }
+                    httpURLConnection.disconnect();
+                } catch (MalformedURLException e) {
+                    if (handler != null) handler.sendEmptyMessage(Const.UpdateElevatorInfoFailed);
+                    e.printStackTrace();
+                } catch (ProtocolException e) {
+                    if (handler != null) handler.sendEmptyMessage(Const.UpdateElevatorInfoFailed);
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    if (handler != null) handler.sendEmptyMessage(Const.UpdateElevatorInfoFailed);
+                    e.printStackTrace();
+                }
+            }
+        };
+        mExecutor.execute(runnable);
+    }
 
     public static void postRequestTextFile(final String serverUrl, final String content, final Handler handler) {
         new Thread(new Runnable() {
@@ -155,7 +200,8 @@ public class MiscUtil {
         return stringBuilder;
     }
 
-    public static String generateHttpGetUrl(int isRepair, int moverDir, int battery, int doorOpen,
+    // TODO: 根据客户端与服务器的交互协议，产生信息上报url，需要服务器与客户端商讨制定
+    private static String convertElevatorInfo2HttpGetUrl(int isRepair, int moverDir, int battery, int doorOpen,
                                             int hasPerson, int CFloor, int CSignal) {
         String baseUrl = Property.HTTP_GET_UPLOAD_INFO_URL_BASE;
         StringBuilder sb = new StringBuilder();
@@ -168,6 +214,19 @@ public class MiscUtil {
         sb.append("&CFloor="+CFloor);
         sb.append("&CSignal="+CSignal);
         return baseUrl + sb.toString();
+    }
+    private static String convertElevatorInfo2HttpGetUrl(String serverUrlBase, ElevatorInfo info) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(serverUrlBase).append("?");
+        sb.append("Device_Id=10000000000000000001");
+        sb.append("&isRepair=" + info.getIsRepair() + "&");
+        sb.append("&moveDirection" + info.getMoveDir());
+        sb.append("&battery="+ info.getBattery());
+        sb.append("&isDoorOpen="+ info.getDoorOpen());
+        sb.append("&hasPerson="+ info.getHasPerson());
+        sb.append("&CFloor="+ info.getCFloor());
+        sb.append("&CSignal="+ info.getCSignal());
+        return sb.toString();
     }
 
     public static void requestJsonFromWebservice(final String wsdl, final String serverMethodName,

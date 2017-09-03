@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -33,11 +34,16 @@ import android.widget.VideoView;
 import com.bupt.adsystem.Camera.CameraApp;
 import com.bupt.adsystem.Camera.UVCCameraEnumerator;
 import com.bupt.adsystem.R;
+import com.bupt.adsystem.RemoteServer.NetUtil;
 import com.bupt.adsystem.RemoteServer.ServerRequest;
 import com.bupt.adsystem.Utils.AdImageCtrl;
 import com.bupt.adsystem.Utils.AdSystemConfig;
 import com.bupt.adsystem.Utils.AdVideoCtrl;
+import com.bupt.adsystem.Utils.NewImageMgr;
+import com.bupt.adsystem.Utils.NewVideoMgr;
 import com.bupt.adsystem.Utils.Property;
+import com.bupt.adsystem.downloadtask.DownloadManager;
+import com.bupt.adsystem.model.ElevatorInfo;
 import com.bupt.sensordriver.rfid;
 import com.bupt.sensordriver.sensor;
 
@@ -93,20 +99,19 @@ public class MainActivity extends Activity {
     TextView mMiscInfoTv;
     TextView mNetStatusTv;
 
+    // TODO: test
+    ImageView mCameraPushBtn;   // guard logo image as test button
+    ImageView mInitImageIv;
+
     String telNum = "13598163660";
 
     private Handler mMainHandler = new Handler() {
         @Override
         public void dispatchMessage(Message msg) {
             if (msg.what == Elevator_Info) {
-                String elevatorInfo = (String) msg.obj;
-                mElevatorTextView.setText(elevatorInfo);
+                /*String elevatorInfo = (String) msg.obj;
+                mElevatorTextView.setText(elevatorInfo);*/
 
-                int fo = msg.arg1;
-                if (fo == 0) {
-
-                } else if (fo == 1) {
-                }
             }
         }
     };
@@ -146,12 +151,12 @@ public class MainActivity extends Activity {
 
 
 //        final String mRtmpUrl = "rtmp://192.168.1.101:1935/live/test";
-        final String mRtmpUrl = "rtmp://aokai.lymatrix.com/aokai/test25.mp4";
-        final String mPullUrl = "rtmp://aokai.lymatrix.com/aokai/test25.mp4";
- /*       final UVCCameraEnumerator mUVCCamera = UVCCameraEnumerator.instance(getApplicationContext(), null);
+//        final String mRtmpUrl = "rtmp://aokai.lymatrix.com/aokai/test25.mp4";
+//        final String mPullUrl = "rtmp://aokai.lymatrix.com/aokai/test25.mp4";
+        final UVCCameraEnumerator mUVCCamera = UVCCameraEnumerator.instance(getApplicationContext(), null);
         mRTCSurfaceView.init(AnyRTMP.Inst().Egl().getEglBaseContext(), null);
         mRTCRenderer = new VideoRenderer(mRTCSurfaceView);
-        mHosterKit = new RTMPHosterKit(this, mRTMPHosterHelper);
+/*        mHosterKit = new RTMPHosterKit(this, mRTMPHosterHelper);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -161,8 +166,45 @@ public class MainActivity extends Activity {
             }
         }, 5000);*/
 
+        final Activity activity = this;
+        mCameraPushBtn.setOnClickListener(new View.OnClickListener() {
+            boolean isPush = false;
+            @Override
+            public void onClick(View v) {
+                if (!isPush) {
+                    mHosterKit = new RTMPHosterKit(activity, mRTMPHosterHelper);
+                    mHosterKit.setUVCCameraCapturer(mRTCRenderer.GetRenderPointer(), mUVCCamera);
+                    mHosterKit.StartRtmpStream(Property.RTMP_PUSH_URL);
+                    mVideoView.setVisibility(View.INVISIBLE);
+                    mVideoView.setZOrderOnTop(false);
+                    mRTCSurfaceView.setVisibility(View.VISIBLE);
 
-//        DownloadManager.instance(getApplicationContext());
+//                    mGuestKit = new RTMPGuestKit(activity, mRTMPGuestHelper);
+//                    mGuestKit.StartRtmpPlay(Property.RTMP_PULL_URL, mRTCRenderer.GetRenderPointer());
+
+//                    mUVCVideoRecoder = mUVCCamera.getVideoRecorder();
+//                    mUVCVideoRecoder.startRecord();
+                } else {
+                    mHosterKit.StopRtmpStream();
+                    mVideoView.setVisibility(View.VISIBLE);
+                    mVideoView.setZOrderOnTop(true);
+                    mRTCSurfaceView.setVisibility(View.INVISIBLE);
+                    mHosterKit.Clear();
+                    mHosterKit = null;
+
+//                    mGuestKit.StopRtmpPlay();
+//                    mGuestKit.Clear();
+//                    mGuestKit = null;
+                }
+                isPush = !isPush;
+            }
+        });
+
+
+        DownloadManager.instance(getApplicationContext());
+        new ServerRequest(getApplicationContext(), mMainHandler);
+        NewVideoMgr.instance(getApplicationContext(), mVideoView);
+        NewImageMgr.instance(getApplicationContext(), mImageSwitcher);
 
 
 /*        button.setOnClickListener(new View.OnClickListener() {
@@ -183,15 +225,15 @@ public class MainActivity extends Activity {
 //                    Log.d(TAG, "Request Json Content: \n" +
 //                            jsonObject.toString());
 //
-////                    MiscUtil.postRequestTextFile(url, jsonObject.toString(), handler);
-////                    MiscUtil.getRequestTextFile(url+"="+jsonObject.toString(), handler);
-////                    MiscUtil.requestJsonFromWebservice(url, jsonObject.toString(), handler);
+////                    NetUtil.postRequestTextFile(url, jsonObject.toString(), handler);
+////                    NetUtil.getRequestTextFile(url+"="+jsonObject.toString(), handler);
+////                    NetUtil.requestJsonFromWebservice(url, jsonObject.toString(), handler);
 //                } catch (JSONException e) {
 //                    e.printStackTrace();
 //                }
 //
-////                String urlGet = MiscUtil.generateHttpGetUrl(0, 1, 80, 0, 0, 1, -89);
-////                MiscUtil.getRequestTextFile(urlGet, handler);
+////                String urlGet = NetUtil.generateHttpGetUrl(0, 1, 80, 0, 0, 1, -89);
+////                NetUtil.getRequestTextFile(urlGet, handler);
 
                 Class<TelephonyManager> c = TelephonyManager.class;
                 try
@@ -266,6 +308,9 @@ public class MainActivity extends Activity {
         mImageSwitcher = (ImageSwitcher) findViewById(R.id.image_switcher); // 展示广告图像
         mNetStatusTv = (TextView) findViewById(R.id.network_tv);
 
+        mCameraPushBtn = (ImageView) findViewById(R.id.guard_logo);
+        mInitImageIv = (ImageView) findViewById(R.id.image_init_view);
+
         updateDateAndTime();
     }
 
@@ -283,6 +328,7 @@ public class MainActivity extends Activity {
 
             mPhoneStateTv.setText(lteSigStrength + "dBm");
             mSignalIv.setImageResource(imageIdMap[getLteLevel(signalStrength)]);
+            ElevatorInfo.instance().setCSignal(lteSigStrength);
         }
     };
 
@@ -449,6 +495,9 @@ public class MainActivity extends Activity {
             Toast.makeText(this, warnMsg[sensorData[3]], Toast.LENGTH_LONG).show();
 //            callPhone(telNum);
         }
+        // TODO: 更新ElevatorInfo的相关信息, 根据底层传感器的上报信息的格式，更新相应数据，待确定
+        //  ElevatorInfo.instance().setHasPerson();
+        NetUtil.asyncReportElevatorInfo(ElevatorInfo.instance(), mMainHandler);
         return true;
     }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.bupt.adsystem.Utils.AdSystemConfig;
 import com.bupt.adsystem.Utils.Property;
@@ -53,7 +52,7 @@ public class MediaUpdateReceiver implements MessageTargetReceiver {
     private Handler mMediaStrategyUpdateHandler = new Handler() {
         @Override
         public void dispatchMessage(Message msg) {
-            if (msg.what == MiscUtil.QUEST_FileServer_SUCCESS) {
+            if (msg.what == NetUtil.QUEST_FileServer_SUCCESS) {
                 mXmlText = (String) msg.obj;
                 newMediaInfo = AdMediaInfo.parseXmlFromText(mXmlText);
                 oldMediaInfo = mStrategyMgr.adMediaInfo;    // this line can't be deleted
@@ -80,10 +79,10 @@ public class MediaUpdateReceiver implements MessageTargetReceiver {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-//        MiscUtil.postRequestTextFile(xmlStrategy + mScheduleId + ".xml", jsonObject.toString(), mMediaStrategyUpdateHandler);
+//        NetUtil.postRequestTextFile(xmlStrategy + mScheduleId + ".xml", jsonObject.toString(), mMediaStrategyUpdateHandler);
         LogUtil.e("xmlStrategy.url------"+xmlStrategy + mScheduleId + ".xml");
-        MiscUtil.getRequestTextFile(xmlStrategy + mScheduleId + ".xml", mMediaStrategyUpdateHandler,
-                MiscUtil.QUEST_FileServer_SUCCESS);
+        NetUtil.getRequestTextFile(xmlStrategy + mScheduleId + ".xml", mMediaStrategyUpdateHandler,
+                NetUtil.QUEST_FileServer_SUCCESS);
         return null;
     }
 

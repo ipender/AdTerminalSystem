@@ -109,6 +109,7 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/guard_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/main_logo_icon"
@@ -152,11 +153,11 @@
             android:layout_height="match_parent"
             android:visibility="invisible"/>
 
-        <ImageView
+<!--        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@mipmap/video_pic"/>
+            android:src="@mipmap/video_pic"/>-->
 
     </FrameLayout>
 

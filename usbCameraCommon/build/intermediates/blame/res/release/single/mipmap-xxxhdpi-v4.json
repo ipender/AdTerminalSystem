@@ -1,15 +1,15 @@
 [
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/release/mipmap-xxxhdpi-v4/ic_frame_cross.png",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xxxhdpi-v4/ic_frame_cross.png"
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/release/mipmap-xxxhdpi-v4/ic_frame_circle_2.png",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xxxhdpi-v4/ic_frame_circle_2.png"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/release/mipmap-xxxhdpi-v4/ic_frame_cross_quarter.png",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xxxhdpi-v4/ic_frame_cross_quarter.png"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/release/mipmap-xxxhdpi-v4/ic_frame_circle_2.png",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xxxhdpi-v4/ic_frame_circle_2.png"
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/release/mipmap-xxxhdpi-v4/ic_frame_cross.png",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-xxxhdpi-v4/ic_frame_cross.png"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/release/mipmap-xxxhdpi-v4/ic_frame_frame.png",
