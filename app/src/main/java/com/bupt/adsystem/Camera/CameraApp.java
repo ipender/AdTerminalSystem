@@ -109,7 +109,13 @@ public class CameraApp {
             EXECUTER.execute(new Runnable() {
                 @Override
                 public void run() {
-                    mUVCCamera.open(ctrlBlock);
+                    try {
+                        mUVCCamera.open(ctrlBlock);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        return;
+                    }
+
                     mUVCCamera.setStatusCallback(new IStatusCallback() {
                         @Override
                         public void onStatus(final int statusClass, final int event, final int selector,

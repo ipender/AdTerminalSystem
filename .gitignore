@@ -5,6 +5,6 @@
 .DS_Store
 /build
 /captures
-libuvccamera/build/*
-usbCameraCommon/build/*
+libuvccamera/build
+usbCameraCommon/build
 

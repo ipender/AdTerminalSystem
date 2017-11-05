@@ -4,12 +4,12 @@
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-ldpi-v4/ic_frame_circle_2.png"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/mipmap-ldpi-v4/ic_frame_cross.png",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-ldpi-v4/ic_frame_cross.png"
-    },
-    {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/mipmap-ldpi-v4/ic_transparent.png",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-ldpi-v4/ic_transparent.png"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/mipmap-ldpi-v4/ic_frame_cross.png",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/mipmap-ldpi-v4/ic_frame_cross.png"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/mipmap-ldpi-v4/ic_frame_cross_quarter.png",

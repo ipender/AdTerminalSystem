@@ -97,21 +97,23 @@ public class MediaStrategyMgr {
                     videoPath = mMediaPath + videoContainer.get(fileId).filename;
                     videoList.add(videoPath);
                 }
-                return videoList;
+                if (videoList.size() > 0) return videoList;
             }
         }
-        return getVideoList();
+
+        return LocalMediaFile.getLocalVideoFile();
     }
 
     public List<String> getVideoList() {
-        if (adMediaInfo == null) return null;
+        if (adMediaInfo == null) return LocalMediaFile.getLocalVideoFile();
         List<String> videoList = new ArrayList<>();
         Set<String> keySets = adMediaInfo.videoContainer.keySet();
         for (String key : keySets) {
             String videoPath = mMediaPath + adMediaInfo.videoContainer.get(key).filename;
             videoList.add(videoPath);
         }
-        return videoList;
+        if (videoList.size() > 0) return videoList;
+        return LocalMediaFile.getLocalVideoFile();
     }
 
 
@@ -139,14 +141,15 @@ public class MediaStrategyMgr {
 
 
     public List<String> getImageList() {
-        if (adMediaInfo == null) return null;
+        if (adMediaInfo == null) return LocalMediaFile.getLocalImageFile();
         List<String> imageList = new ArrayList<>();
         Set<String> keySets = adMediaInfo.imageContainer.keySet();
         for (String key : keySets) {
             String imagePath = mMediaPath + adMediaInfo.imageContainer.get(key).filename;
             imageList.add(imagePath);
         }
-        return imageList;
+        if (imageList.size() > 0) return imageList;
+        return LocalMediaFile.getLocalImageFile();
     }
 
     public void savaXmlMediaStrategy(String xmlText){

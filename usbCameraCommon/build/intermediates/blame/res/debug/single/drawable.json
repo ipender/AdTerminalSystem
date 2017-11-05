@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/toggle.xml",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle.xml"
-    },
-    {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/quater_clear_rect.xml",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/quater_clear_rect.xml"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/toggle.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle.xml"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/frame.9.png",
@@ -32,20 +32,20 @@
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/btn_shutter_video_recording.xml"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/btn_new_shutter.xml",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/btn_new_shutter.xml"
-    },
-    {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/btn_new_shutter_video.xml",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/btn_new_shutter_video.xml"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/toggle_button_base.xml",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle_button_base.xml"
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/btn_new_shutter.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/btn_new_shutter.xml"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/frame_cross.9.png",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/frame_cross.9.png"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/toggle_button_base.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle_button_base.xml"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/usbCameraCommon/build/intermediates/res/merged/debug/drawable/recordingtime.xml",

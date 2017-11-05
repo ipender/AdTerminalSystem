@@ -281,6 +281,7 @@ public class UVCCameraEnumerator implements UVCCameraInterface, LifeCycle {
         if (mUVCCamera != null) {
             mUVCCamera.stopCapture();
             mUVCCamera.stopPreview();
+            mUVCCamera.destroy();
         }
     }
 

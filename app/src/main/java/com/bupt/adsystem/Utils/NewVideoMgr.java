@@ -99,6 +99,20 @@ public class NewVideoMgr implements UpdateMedia{
         mVideoHandler.sendEmptyMessage(MSG_PLAY_VIDEO);
     }
 
+    private int currentPosition = 0;
+    public void stopVideoPlay() {
+        mVideoView.pause();
+        mVideoView.setVisibility(View.GONE);
+        currentPosition = mVideoView.getCurrentPosition();
+    }
+
+    public void restartVideoPlay() {
+        mVideoView.setVisibility(View.VISIBLE);
+        mVideoView.setZOrderOnTop(true);
+        mVideoView.seekTo(currentPosition);
+        mVideoView.start();
+    }
+
     private MediaPlayer.OnErrorListener mOnErrorListener = new MediaPlayer.OnErrorListener() {
         @Override
         public boolean onError(MediaPlayer mp, int what, int extra) {

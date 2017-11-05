@@ -1,11 +1,14 @@
 package org.webrtc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.nfc.Tag;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
 
+import org.anyrtc.anyrtmp.MainActivity;
 import org.webrtc.CameraEnumerationAndroid.CaptureFormat;
 
 import java.util.HashSet;
@@ -97,9 +100,14 @@ public class UVCCameraVideoCapturer implements VideoCapturer,
             final boolean didPost = maybePostOnCameraThread(new Runnable() {
                 @Override
                 public void run() {
-                    openCameraAttempts = 0;
-                    startCaptureOnCameraThread(width, height, framerate, frameObserver,
-                            applicationContext);
+                    try {
+                        openCameraAttempts = 0;
+                        startCaptureOnCameraThread(width, height, framerate, frameObserver,
+                                applicationContext);
+                    } catch (Exception ex) {
+                        Toast.makeText(applicationContext, "UVCCamera未连结！", Toast.LENGTH_LONG).show();
+                        ex.printStackTrace();
+                    }
                 }
             });
 

@@ -8,12 +8,12 @@
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/quater_clear_rect.xml"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/drawable/border.xml",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/border.xml"
-    },
-    {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/drawable/toggle_slide.xml",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/toggle_slide.xml"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/drawable/border.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/drawable/border.xml"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/drawable/toggle.xml",

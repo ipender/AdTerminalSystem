@@ -8,12 +8,12 @@
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/layout/color_picker.xml"
     },
     {
-        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/layout/view_frame_selector.xml",
-        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/layout/view_frame_selector.xml"
-    },
-    {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/layout/list_item_bluetooth_device_info.xml",
         "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/layout/list_item_bluetooth_device_info.xml"
+    },
+    {
+        "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/layout/view_frame_selector.xml",
+        "source": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/exploded-aar/com.serenegiant/common/1.1.9/res/layout/view_frame_selector.xml"
     },
     {
         "merged": "/home/hadoop/AndroidStudioProjects/xufu/adSystem/libuvccamera/build/intermediates/res/merged/debug/layout/listitem_device.xml",

@@ -66,6 +66,7 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     private static final boolean DEBUG = AdSystemConfig.DEBUG;
 
+    private static MainActivity instance = null;
     private ImageSwitcher mImageSwitcher;
     private VideoView mVideoView;
     private TextureView mTextureView;
@@ -167,18 +168,23 @@ public class MainActivity extends Activity {
         }, 5000);*/
 
         final Activity activity = this;
+
+        instance = this;
+        DownloadManager.instance(getApplicationContext());
+        new ServerRequest(getApplicationContext(), mMainHandler);
+        final NewVideoMgr videoMgr = NewVideoMgr.instance(getApplicationContext(), mVideoView);
+        NewImageMgr.instance(getApplicationContext(), mImageSwitcher);
+
         mCameraPushBtn.setOnClickListener(new View.OnClickListener() {
             boolean isPush = false;
             @Override
             public void onClick(View v) {
                 if (!isPush) {
+                    videoMgr.stopVideoPlay();
                     mHosterKit = new RTMPHosterKit(activity, mRTMPHosterHelper);
                     mHosterKit.setUVCCameraCapturer(mRTCRenderer.GetRenderPointer(), mUVCCamera);
                     mHosterKit.StartRtmpStream(Property.RTMP_PUSH_URL);
-                    mVideoView.setVisibility(View.INVISIBLE);
-                    mVideoView.setZOrderOnTop(false);
                     mRTCSurfaceView.setVisibility(View.VISIBLE);
-
 //                    mGuestKit = new RTMPGuestKit(activity, mRTMPGuestHelper);
 //                    mGuestKit.StartRtmpPlay(Property.RTMP_PULL_URL, mRTCRenderer.GetRenderPointer());
 
@@ -186,12 +192,11 @@ public class MainActivity extends Activity {
 //                    mUVCVideoRecoder.startRecord();
                 } else {
                     mHosterKit.StopRtmpStream();
-                    mVideoView.setVisibility(View.VISIBLE);
-                    mVideoView.setZOrderOnTop(true);
+
                     mRTCSurfaceView.setVisibility(View.INVISIBLE);
                     mHosterKit.Clear();
                     mHosterKit = null;
-
+                    videoMgr.restartVideoPlay();
 //                    mGuestKit.StopRtmpPlay();
 //                    mGuestKit.Clear();
 //                    mGuestKit = null;
@@ -199,12 +204,6 @@ public class MainActivity extends Activity {
                 isPush = !isPush;
             }
         });
-
-
-        DownloadManager.instance(getApplicationContext());
-        new ServerRequest(getApplicationContext(), mMainHandler);
-        NewVideoMgr.instance(getApplicationContext(), mVideoView);
-        NewImageMgr.instance(getApplicationContext(), mImageSwitcher);
 
 
 /*        button.setOnClickListener(new View.OnClickListener() {
@@ -287,6 +286,22 @@ public class MainActivity extends Activity {
 
     }
 
+    public static MainActivity instance() {
+        return instance;
+    }
+
+    public void switchImageView(int layer) {
+        if (layer == 0) {
+            mImageSwitcher.setVisibility(View.VISIBLE);
+            mInitImageIv.setVisibility(View.INVISIBLE);
+            mInitImageIv.destroyDrawingCache();
+        } else {
+            mInitImageIv.setVisibility(View.VISIBLE);
+            mImageSwitcher.setVisibility(View.INVISIBLE);
+            mImageSwitcher.destroyDrawingCache();
+        }
+    }
+
     private void initView() {
 
         mDateTv = (TextView) findViewById(R.id.date);
@@ -313,6 +328,7 @@ public class MainActivity extends Activity {
 
         updateDateAndTime();
     }
+
 
     private PhoneStateListener mPhoneStateListener = new PhoneStateListener(){
 

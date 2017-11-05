@@ -16,6 +16,7 @@ import android.widget.ViewSwitcher;
 
 import com.bupt.adsystem.R;
 import com.bupt.adsystem.RemoteServer.MediaStrategyMgr;
+import com.bupt.adsystem.view.MainActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -105,6 +106,9 @@ public class NewImageMgr implements UpdateMedia{
         });
         initAnimLibrary();
         mImageList = getImageListWhenStartUp();
+        if (mImageList.size() > 0) {
+            MainActivity.instance().switchImageView(0);
+        }
         mImageHandler.sendEmptyMessage(MSG_SWITCH_IMAGE);
     }
 
